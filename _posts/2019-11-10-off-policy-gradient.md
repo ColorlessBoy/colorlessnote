@@ -52,7 +52,7 @@ This section has three section:
   \nabla_u J_\gamma(u) =& \nabla_u\left[\sum_{s\in S} d^b(s) \sum_{a \in A} \pi(a \vert s) Q^{\pi,\gamma} (s,a)\right] \\
   =& \sum_{s \in S} d^b(s) \sum_{a \in A}
   \left[\nabla_u \pi(a \vert s) Q^{\pi,\gamma}(s, a) 
-  	+ \pi(a\verts) \nabla_u Q^{\pi, \gamma}(s,a) \right]
+  	+ \pi(a\vert s) \nabla_u Q^{\pi, \gamma}(s,a) \right]
   \end{align*}
   $$
   We use $$\nabla_u J_\gamma(u) \approx g(u) = \sum_{s \in S} d^b(s) \sum_{a \in A}\left[\nabla_u \pi(a \vert s) Q^{\pi,\gamma}(s, a)\right]$$;
@@ -75,14 +75,14 @@ This section has three section:
   $$
   \sum_{s\in S} d^b(s) \sum_{a \in A} \pi_{u}(a \vert s) 
   \sum_{s,a,s_{t+1}} P(s,a,s_{t+1})[R(s, a, s_{t+1}) + \gamma_{t+1} V^{\pi_u, \gamma}(s_{t+1})] \\
-  \le \sum_{s\in S} d^b(s) \sum_{a\in A} \pi_{u'}(a\verts) \sum_{s,a,s_{t+1}} P(s,a,s_{t+1})[R(s, a, s_{t+1}) + \gamma_{t+1} V^{\pi_u, \gamma}(s_{t+1})]
+  \le \sum_{s\in S} d^b(s) \sum_{a\in A} \pi_{u'}(a\vert s) \sum_{s,a,s_{t+1}} P(s,a,s_{t+1})[R(s, a, s_{t+1}) + \gamma_{t+1} V^{\pi_u, \gamma}(s_{t+1})]
   $$
   But if we take a further step, it might not hold:
   $$
-  \sum_a \pi_{u'}(a\verts) \sum_{s, a, s_{t+1}}P(s, a, s_{t+1})\sum_{a_{t+1}} \pi_u(a_{t+1} \vert s_{t+1}) \cdot\\
+  \sum_a \pi_{u'}(a\vert s) \sum_{s, a, s_{t+1}}P(s, a, s_{t+1})\sum_{a_{t+1}} \pi_u(a_{t+1} \vert s_{t+1}) \cdot\\
   \sum_{s_{t+2}} P(s_{t+1}, a_{t+1}, s_{t+2})[R(s_{t+1}, a_{t+1}, s_{t+2}) + \gamma_{t+2} V^{\pi_u, \gamma}(s_{t+2})]\\
   \le
-  \sum_a \pi_{u'}(a\verts) \sum_{s, a, s_{t+1}}P(s, a, s_{t+1})\sum_{a_{t+1}} \pi_{u'}(a_{t+1} \vert s_{t+1}) \cdot\\
+  \sum_a \pi_{u'}(a\vert s) \sum_{s, a, s_{t+1}}P(s, a, s_{t+1})\sum_{a_{t+1}} \pi_{u'}(a_{t+1} \vert s_{t+1}) \cdot\\
   \sum_{s_{t+2}} P(s_{t+1}, a_{t+1}, s_{t+2})[R(s_{t+1}, a_{t+1}, s_{t+2}) + \gamma_{t+2} V^{\pi_u, \gamma}(s_{t+2})]
   $$
   
@@ -99,14 +99,14 @@ This section has three section:
 
   In tabular representation, we let u with tabular index $$i_{s}, j$$,(where $$1 \le j \le m$$) then
   $$
-    \sum_{s' \in S} d^b(s') \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a \vert s') Q^{\pi_u, \gamma} (s', a) \\= d^b(s) \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a\verts) Q^{\pi_u, \gamma}(s, a) := g_1(u_{i_s, j})
+    \sum_{s' \in S} d^b(s') \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a \vert s') Q^{\pi_u, \gamma} (s', a) \\= d^b(s) \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a\vert s) Q^{\pi_u, \gamma}(s, a) := g_1(u_{i_s, j})
   $$
   Similarly, we denote
   $$
     g_2(u_{i_s,j}) = \sum_{s'\in S} d^b(s') \sum_{a \in A} \pi_u (a \vert s') \frac{\partial}{\partial u_{i_s, k}} Q^{\pi_u, \gamma} (s', a) 
   \\= d^b(s) \sum_{a \in  A} \pi_u(a \vert s) \frac{\partial}{\partial u_{i_s, k}} Q^{\pi_u, \gamma} (s, a)
   $$
-If $$g_2(u_{i_s, j}) \ne 0$$, we can get $$u'$$ that satisfy $$Q^{\pi_{u'}, \gamma}(s,a) > Q^{\pi_{u},\gamma}(s,a)$$, which means that $$\sum^m_{j=1} \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a\verts) Q^{\pi_u, \gamma} (s,a) \ne 0 \Rightarrow \exists j, g_1(u_{i_s, j}) \ne 0$$.
+If $$g_2(u_{i_s, j}) \ne 0$$, we can get $$u'$$ that satisfy $$Q^{\pi_{u'}, \gamma}(s,a) > Q^{\pi_{u},\gamma}(s,a)$$, which means that $$\sum^m_{j=1} \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a\vert s) Q^{\pi_u, \gamma} (s,a) \ne 0 \Rightarrow \exists j, g_1(u_{i_s, j}) \ne 0$$.
 
 Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have $$Z \subset \tilde Z$$, we can get $$Z = \tilde Z$$.
 
@@ -118,10 +118,10 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
   $$
   \begin{align*}
   g(u) =& \mathbb{E} \left[ \sum_{a \in A} \nabla_u \pi(a \vert s) Q^{\pi,\gamma} (s, a) \Bigg\vert s \sim d^b \right] \\
-  =& \mathbb{E} \left[ \sum_{a \in A}b(a\verts) \frac{\pi(a\verts)}{b(a\verts)} \frac{\nabla_u \pi(a\verts)}{\pi(a\verts)} Q^{\pi,\gamma}(s,a) \Bigg\vert s \sim d^b \right] \\
-  =& \mathbb{E} \left[\frac{\pi(a\verts)}{b(a\verts)} \frac{\nabla \pi(a\verts)}{\pi(a\verts)} Q^{\pi,\gamma}(s,a) \Bigg\vert s \sim d^b, a \sim b(\cdot\verts) \right] \\
-  =& \mathbb{E}_b \left[\frac{\pi(a\verts)}{b(a\verts)} \frac{\nabla \pi(a\verts)}{\pi(a\verts)} Q^{\pi,\gamma}(s,a) \right] \\
-  =& \mathbb{E}_b \left[\frac{\pi(a\verts)}{b(a\verts)} \frac{\nabla \pi(a\verts)}{\pi(a\verts)} (Q^{\pi,\gamma}(s,a) - \hat V(s_t)) \right]
+  =& \mathbb{E} \left[ \sum_{a \in A}b(a\vert s) \frac{\pi(a\vert s)}{b(a\vert s)} \frac{\nabla_u \pi(a\vert s)}{\pi(a\vert s)} Q^{\pi,\gamma}(s,a) \Bigg\vert s \sim d^b \right] \\
+  =& \mathbb{E} \left[\frac{\pi(a\vert s)}{b(a\vert s)} \frac{\nabla \pi(a\vert s)}{\pi(a\vert s)} Q^{\pi,\gamma}(s,a) \Bigg\vert s \sim d^b, a \sim b(\cdot\vert s) \right] \\
+  =& \mathbb{E}_b \left[\frac{\pi(a\vert s)}{b(a\vert s)} \frac{\nabla \pi(a\vert s)}{\pi(a\vert s)} Q^{\pi,\gamma}(s,a) \right] \\
+  =& \mathbb{E}_b \left[\frac{\pi(a\vert s)}{b(a\vert s)} \frac{\nabla \pi(a\vert s)}{\pi(a\vert s)} (Q^{\pi,\gamma}(s,a) - \hat V(s_t)) \right]
   \end{align*}
   $$
 

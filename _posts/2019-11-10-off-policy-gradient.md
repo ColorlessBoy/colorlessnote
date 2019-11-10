@@ -157,7 +157,7 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
   =& \delta_t + \lambda \gamma_{t+1} (\rho_{t+1} \delta^\lambda_{t+1} - (1-\rho_{t+1})\hat V(s_{t+1}))
   \end{align*}
   $$
-
+  {{site.basseurl}}
   ({{ site.url }}/assets/img/off-policy-actor-critic/equ1.png)
 
   ![equ1]({{ site.url }}/assets/img/off-policy-actor-critic/equ1.png)

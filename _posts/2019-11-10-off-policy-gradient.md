@@ -24,10 +24,12 @@ tags: policy-gradient
 
 ## 1. Notation and Problem set
 
-- $$ V^{\pi, \gamma}(s) = \mathbb{E}[r_{t+1} + \ldots + r_{t+T} | s_t = s], \forall s \in S $$;
-- $$ Q^{\pi, \gamma}(s,a) = \sum_{s' \in S} P(s' | s, a) [ R(s, a, s') + \gamma(s') V^{\pi, \gamma}(s')] $$;
+$$
+V^{\pi, \gamma}(s) = \mathbb{E}[r_{t+1} + \ldots + r_{t+T} | s_t = s], \forall s \in S \\
+Q^{\pi, \gamma}(s,a) = \sum_{s' \in S} P(s' | s, a) [ R(s, a, s') + \gamma(s') V^{\pi, \gamma}(s')]
+$$
 
-- Objective: $$ J_{\gamma}(u) = \sum_{s} d^b(x) V^{\pi_u, \gamma}(s) $$, where b is behavior policy. (I think the target is problematical). According to some papers, if we exactly correct the probability, the variance will be too high to apply.
+- Objective: $$J_{\gamma}(u) = \sum_{s} d^b(x) V^{\pi_u, \gamma}(s)$$, where b is behavior policy. (I think the target is problematical). According to some papers, if we exactly correct the probability, the variance will be too high to apply.
 
 ## 2. The Off-PAC Algorithms
 

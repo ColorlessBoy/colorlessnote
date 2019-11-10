@@ -2,7 +2,7 @@
 layout: mathpost
 title:  "Off-policy Actor-critic"
 date: 2019-11-10 16:55:00 +0800
-categories: [papernotes, rl]
+categories: papernotes
 tags: policy-gradient
 ---
 
@@ -161,12 +161,6 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
   ![equ1](https://colorlessboy.github.io/notebook/assets/img/off-policy-actor-critic/equ1.png)
   ![equ2](https://colorlessboy.github.io/notebook/assets/img/off-policy-actor-critic/equ2.png)
 
-  ![equ1]({{ site.url }}/{{ site.baseurl }}/assets/img/off-policy-actor-critic/equ1.png)
-
 - Algorithm 1 The Off-PAC algorithm
 
-  <img src="https://colorlessboy.github.io/notebook/assets/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 67%;" />
-
-  <img src="{{ site.url }}/{{ site.baseurl }}/assets/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 67%;" />
-
-## 3. Convergence Analysis
+  <img src="https://colorlessboy.github.io/notebook/assets/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 80%;" />

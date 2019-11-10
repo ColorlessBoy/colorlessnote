@@ -2,7 +2,7 @@
 layout: mathpost
 title:  "Off-policy Actor-critic"
 date: 2019-11-10 16:55:00 +0800
-categories: papers
+categories: papernotes
 tags: policy-gradient
 ---
 
@@ -157,15 +157,15 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
   =& \delta_t + \lambda \gamma_{t+1} (\rho_{t+1} \delta^\lambda_{t+1} - (1-\rho_{t+1})\hat V(s_{t+1}))
   \end{align*}
   $$
-  {{site.basseurl}}
-  ({{ site.url }}/assets/img/off-policy-actor-critic/equ1.png)
 
   ![equ1]({{ site.url }}/assets/img/off-policy-actor-critic/equ1.png)
 
-  ![equ2]({{ site.url }}/asserts/img/off-policy-actor-critic/equ2.png)
+  ![equ2]({{ site.url }}/assets/img/off-policy-actor-critic/equ2.png)
+
+  ![equ1]({{ "/assets/img/off-policy-actor-critic/equ1.png" | absolute_url }})
 
 - Algorithm 1 The Off-PAC algorithm
 
-  <img src="{{ site.url }}/asserts/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 67%;" />
+  <img src="{{ site.url }}/assets/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 67%;" />
 
 ## 3. Convergence Analysis

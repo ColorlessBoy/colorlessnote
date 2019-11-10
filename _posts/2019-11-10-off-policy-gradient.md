@@ -158,11 +158,10 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
   \end{align*}
   $$
 
-  ![equ1]({{ site.url }}/assets/img/off-policy-actor-critic/equ1.png)
+  ![equ1](https://colorlessboy.github.io/notebook/assets/img/off-policy-actor-critic/equ1.png)
 
-  ![equ2]({{ site.url }}/assets/img/off-policy-actor-critic/equ2.png)
+  ![equ2](https://colorlessboy.github.io/notebook/assets/img/off-policy-actor-critic/equ2.png)
 
-  ![equ1]({{ "/assets/img/off-policy-actor-critic/equ1.png" | absolute_url }})
 
 - Algorithm 1 The Off-PAC algorithm
 

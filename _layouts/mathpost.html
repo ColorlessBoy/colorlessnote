@@ -3,4 +3,16 @@ layout: "post"
 ---
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
+<h4>
+<b>Categories</b>: 
+{% for category in page.categories %}
+    {{ category }}
+{% endfor %}
+</h4>
+<h4>
+<b>Tags</b>:
+{% for tag in page.tags %}
+    {{ tag }}
+{% endfor %}
+</h4>
 {{ content }}

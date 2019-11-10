@@ -115,23 +115,22 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
 ### 2.3 The Actor: Incremental Update Algorithm with Eligibility Traces
 
 - The expectation of the gradient:
-    $$
-    \begin{align*}
-    g(u) =& \mathbb{E} \left[ \sum_{a \in A} \nabla_u \pi(a | s) Q^{\pi,\gamma} (s, a) \Bigg| s \sim d^b \right] \\
-    =& \mathbb{E} \left[ \sum_{a \in A}b(a|s) \frac{\pi(a|s)}{b(a|s)} \frac{\nabla_u \pi(a|s)}{\pi(a|s)} Q^{\pi,\gamma}(s,a) \Bigg| s \sim d^b \right] \\
-    =& \mathbb{E} \left[\frac{\pi(a|s)}{b(a|s)} \frac{\nabla \pi(a|s)}{\pi(a|s)} Q^{\pi,\gamma}(s,a) \Bigg| s \sim d^b, a \sim b(\cdot|s) \right] \\
-    =& \mathbb{E}_b \left[\frac{\pi(a|s)}{b(a|s)} \frac{\nabla \pi(a|s)}{\pi(a|s)} Q^{\pi,\gamma}(s,a) \right] \\
-    =& \mathbb{E}_b \left[\frac{\pi(a|s)}{b(a|s)} \frac{\nabla \pi(a|s)}{\pi(a|s)} (Q^{\pi,\gamma}(s,a) - \hat V(s_t)) \right]
-    \end{align*}
-    $$
+  $$
+  \begin{align*}
+  g(u) =& \mathbb{E} \left[ \sum_{a \in A} \nabla_u \pi(a | s) Q^{\pi,\gamma} (s, a) \Bigg| s \sim d^b \right] \\
+  =& \mathbb{E} \left[ \sum_{a \in A}b(a|s) \frac{\pi(a|s)}{b(a|s)} \frac{\nabla_u \pi(a|s)}{\pi(a|s)} Q^{\pi,\gamma}(s,a) \Bigg| s \sim d^b \right] \\
+  =& \mathbb{E} \left[\frac{\pi(a|s)}{b(a|s)} \frac{\nabla \pi(a|s)}{\pi(a|s)} Q^{\pi,\gamma}(s,a) \Bigg| s \sim d^b, a \sim b(\cdot|s) \right] \\
+  =& \mathbb{E}_b \left[\frac{\pi(a|s)}{b(a|s)} \frac{\nabla \pi(a|s)}{\pi(a|s)} Q^{\pi,\gamma}(s,a) \right] \\
+  =& \mathbb{E}_b \left[\frac{\pi(a|s)}{b(a|s)} \frac{\nabla \pi(a|s)}{\pi(a|s)} (Q^{\pi,\gamma}(s,a) - \hat V(s_t)) \right]
+  \end{align*}
+  $$
 
 - Here is a further approximation:
   $$
   g(u) \approx \hat g(u) = \mathbb{E}_b [\rho(s_t, a_t) \psi(s_t, a_t) (R^\lambda_t - \hat V(s_t))]
   $$
-  where $R^\lambda_t = r_{t+1} + (1 - \lambda) \gamma(s_{t+1}) \hat V(s_{t+1}) + \lambda \gamma(s_{t+1})\rho(s_{t+1}, a_{t+1}) R^\lambda_{t+1}$.
-
-- 
+  where $$R^\lambda_t = r_{t+1} + (1 - \lambda) \gamma(s_{t+1}) \hat V(s_{t+1}) + \lambda \gamma(s_{t+1})\rho(s_{t+1}, a_{t+1}) R^\lambda_{t+1}$$.
+- From Backward to Forward:
   $$
   \begin{align*}
   \delta^\lambda_t =& R^\lambda_t - \hat V(s_t) \\
@@ -143,9 +142,9 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
   \end{align*}
   $$
 
-- ![equ1]({{ site.url }}/assets/img/Off-policy-Actor-critic/equ1.png)
+  ![equ1]({{ site.url }}/assets/img/Off-policy-Actor-critic/equ1.png)
 
-- ![equ2]({{ site.url }}/asserts/img/Off-policy-Actor-critic/equ2.png)
+  ![equ2]({{ site.url }}/asserts/img/Off-policy-Actor-critic/equ2.png)
 
 - Algorithm 1 The Off-PAC algorithm
 

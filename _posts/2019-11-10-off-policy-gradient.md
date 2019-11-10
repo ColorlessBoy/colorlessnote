@@ -1,11 +1,10 @@
 ---
 layout: mathpost
 title:  "Off-policy Actor-critic"
-date:   2019-11-10 16:55:00 +0800
+date: 2019-11-10 16:55:00 +0800
 categories: papers
 tags: policy-gradient
 ---
-# Off-policy Actor-critic
 
 ## Introduction
 

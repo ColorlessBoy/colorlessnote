@@ -18,34 +18,33 @@ tags: policy-gradient
   - Finding greedy action w.r.t. action-value function becomes problematical for large action space;
   - A small change in action-value function can cause large changes in policy, which creates difficulties for convergence proof and real-time applications.
 - Contributions:
-  - The first actor-critic method that can be applied off-policy, we call $Off-PAC$;
+  - The first actor-critic method that can be applied off-policy, we call **Off-PAC**;
   - Off-policy gradient theorem and convergence proof;
-  - Experience: $Q(\lambda)$, $Greedy-GQ$, $Softmax-GQ$, $Off-PAC$.
+  - Experience: $$Q(\lambda)$$, **Greedy-GQ**, **Softmax-GQ** , **Off-PAC**.
 
 ## 1. Notation and Problem set
 
-- $V^{\pi, \gamma}(s) = \mathbb{E}[r_{t+1} + \ldots + r_{t+T} | s_t = s], \forall s \in S$;
-- $Q^{\pi, \gamma}(s,a) = \sum_{s' \in S} P(s' | s, a) [ R(s, a, s') + \gamma(s') V^{\pi, \gamma}(s')]$;
+- $$ V^{\pi, \gamma}(s) = \mathbb{E}[r_{t+1} + \ldots + r_{t+T} | s_t = s], \forall s \in S $$;
+- $$ Q^{\pi, \gamma}(s,a) = \sum_{s' \in S} P(s' | s, a) [ R(s, a, s') + \gamma(s') V^{\pi, \gamma}(s')] $$;
 
-- Objective: $J_{\gamma}(u) = \sum_{s} d^b(x) V^{\pi_u, \gamma}(s)$, where b is behavior policy. (I think the target is problematical). According to some papers, if we exactly correct the probability, the variance will be too high to apply.
+- Objective: $$ J_{\gamma}(u) = \sum_{s} d^b(x) V^{\pi_u, \gamma}(s) $$, where b is behavior policy. (I think the target is problematical). According to some papers, if we exactly correct the probability, the variance will be too high to apply.
 
 ## 2. The Off-PAC Algorithms
 
 This section has three section:
-
-	- Gradient-TD method used in critic;
-	- Off-policy policy-gradient theorem;
-	- Mechanistic algorithm.
+- Gradient-TD method used in critic;
+- Off-policy policy-gradient theorem;
+- Mechanistic algorithm.
 
 ### 2.1 The Critic: Policy Evaluation
 
-- GTD methods minimize the $\lambda$-weighted mean-squared projected Bellman error: $MSPBE(v) = \Arrowvert \hat V - \Pi T^{\lambda, \gamma}_\pi \hat V \Arrowvert^2_D$, where $\hat V = X v$, and for linear representation, $\Pi = X(X^T D X)^{-1} X^T D$;
+- GTD methods minimize the $$\lambda$$-weighted mean-squared projected Bellman error: $$MSPBE(v) = \Arrowvert \hat V - \Pi T^{\lambda, \gamma}_\pi \hat V \Arrowvert^2_D$$, where $$\hat V = X v$$, and for linear representation, $$\Pi = X(X^T D X)^{-1} X^T D$$;
 
 ### 2.2 Off-policy Policy-gradient Theorem
 
-- Off-PAC updates: $u_{t+1} - u_t \approx \alpha_{u,t} \nabla_u J_{\gamma} (u_t)$;
+- Off-PAC updates: $$u_{t+1} - u_t \approx \alpha_{u,t} \nabla_u J_{\gamma} (u_t)$$;
 
-- The problem: $\nabla_u J_\gamma(u) = \nabla_u\left[\sum_{s\in S} d^b(s) \sum_{a \in A} \pi(a | s) Q^{\pi,\gamma} (s,a)\right]$
+- The problem: $$\nabla_u J_\gamma(u) = \nabla_u\left[\sum_{s\in S} d^b(s) \sum_{a \in A} \pi(a | s) Q^{\pi,\gamma} (s,a)\right]$$
   $$
   \begin{align*}
   \nabla_u J_\gamma(u) =& \nabla_u\left[\sum_{s\in S} d^b(s) \sum_{a \in A} \pi(a | s) Q^{\pi,\gamma} (s,a)\right] \\
@@ -54,9 +53,9 @@ This section has three section:
   	+ \pi(a|s) \nabla_u Q^{\pi, \gamma}(s,a) \right]
   \end{align*}
   $$
-  We use $\nabla_u J_\gamma(u) \approx g(u) = \sum_{s \in S} d^b(s) \sum_{a \in A}\left[\nabla_u \pi(a | s) Q^{\pi,\gamma}(s, a)\right]$;
+  We use $$\nabla_u J_\gamma(u) \approx g(u) = \sum_{s \in S} d^b(s) \sum_{a \in A}\left[\nabla_u \pi(a | s) Q^{\pi,\gamma}(s, a)\right]$$;
 
-- **Theorem 1** (Policy Improvement). Given any policy parameter u, let $u' = u + \alpha g(u)$. Then, there exists an $\epsilon > 0$ such that, for all positive $\alpha < \epsilon$, $J_\gamma(u') \ge J_\gamma(u)$. Further, if $\pi$ has a tabular representation, then $V^{\pi_{u'}, \gamma}(s) \ge V^{\pi_u, \gamma}(s)$ for all $s \in S$.
+- **Theorem 1** (Policy Improvement). Given any policy parameter u, let $$u' = u + \alpha g(u)$$. Then, there exists an $$\epsilon > 0$$ such that, for all positive $$\alpha < \epsilon$$, $$J_\gamma(u') \ge J_\gamma(u)$$. Further, if $$\pi$$ has a tabular representation, then $$V^{\pi_{u'}, \gamma}(s) \ge V^{\pi_u, \gamma}(s)$$ for all $$s \in S$$.
 
   **proof**: The key point is
   $$
@@ -66,7 +65,7 @@ This section has three section:
 
   The first inequation comes from the definition of  partial gradient, and the second inequation has problem.
 
-  In tabular representation, we have $\sum_{a \in A} \pi_{u}(a | s) Q^{\pi_u, \gamma}(s, a) \le \sum_{a \in A}\pi_{u'}(a | s) Q^{\pi_u, \gamma}(s, a)$, which can get $V^{\pi_u, \gamma} \le V^{\pi_u', \gamma}(s)$.
+  In tabular representation, we have $$\sum_{a \in A} \pi_{u}(a | s) Q^{\pi_u, \gamma}(s, a) \le \sum_{a \in A}\pi_{u'}(a | s) Q^{\pi_u, \gamma}(s, a)$$, which can get $$V^{\pi_u, \gamma} \le V^{\pi_u', \gamma}(s)$$.
 
   **Errata**:
 
@@ -90,26 +89,26 @@ This section has three section:
   \tilde Z = \{u \in \mathcal{U} | g(u) = 0\}\\
   Z = \{u \in \mathcal{U} | \nabla_u J_{\gamma}(u) = 0 \}
   $$
-  In some function, we can guarantee $Z \subset \tilde Z$. Moreover, if we use a tabular representation, then $Z = \tilde Z$.
+  In some function, we can guarantee $$Z \subset \tilde Z$$. Moreover, if we use a tabular representation, then $$Z = \tilde Z$$.
 
   **proof**: 
 
-  Assume there exists $u^* \in Z$ such that $u^* \notin \tilde Z$. Then $\exists \alpha_{u,t}$, $J_\gamma(u^* + \alpha_{u,t} g(u^*)) > J_\gamma(u)$, which is contradict to theorem1.
+  Assume there exists $$u^* \in Z$$ such that $$u^* \notin \tilde Z$$. Then $$\exists \alpha_{u,t}$$, $$J_\gamma(u^* + \alpha_{u,t} g(u^*)) > J_\gamma(u)$$, which is contradict to theorem1.
 
-  In tabular representation, we let u with tabular index $i_{s}, j$,(where $1 \le j \le m$) then
-$$
-  \sum_{s' \in S} d^b(s') \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a | s') Q^{\pi_u, \gamma} (s', a) \\= d^b(s) \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a|s) Q^{\pi_u, \gamma}(s, a) := g_1(u_{i_s, j})
-$$
+  In tabular representation, we let u with tabular index $$i_{s}, j$$,(where $$1 \le j \le m$$) then
+  $$
+    \sum_{s' \in S} d^b(s') \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a | s') Q^{\pi_u, \gamma} (s', a) \\= d^b(s) \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a|s) Q^{\pi_u, \gamma}(s, a) := g_1(u_{i_s, j})
+  $$
   Similarly, we denote
-$$
-  g_2(u_{i_s,j}) = \sum_{s'\in S} d^b(s') \sum_{a \in A} \pi_u (a | s') \frac{\partial}{\partial u_{i_s, k}} Q^{\pi_u, \gamma} (s', a) 
-\\= d^b(s) \sum_{a \in  A} \pi_u(a | s) \frac{\partial}{\partial u_{i_s, k}} Q^{\pi_u, \gamma} (s, a)
-$$
-If $g_2(u_{i_s, j}) \ne 0$, we can get $u'$ that satisfy $Q^{\pi_{u'}, \gamma}(s,a) > Q^{\pi_{u},\gamma}(s,a)$, which means that $\sum^m_{j=1} \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a|s) Q^{\pi_u, \gamma} (s,a) \ne 0 \Rightarrow \exists j, g_1(u_{i_s, j}) \ne 0$.
+  $$
+    g_2(u_{i_s,j}) = \sum_{s'\in S} d^b(s') \sum_{a \in A} \pi_u (a | s') \frac{\partial}{\partial u_{i_s, k}} Q^{\pi_u, \gamma} (s', a) 
+  \\= d^b(s) \sum_{a \in  A} \pi_u(a | s) \frac{\partial}{\partial u_{i_s, k}} Q^{\pi_u, \gamma} (s, a)
+  $$
+If $$g_2(u_{i_s, j}) \ne 0$$, we can get $$u'$$ that satisfy $$Q^{\pi_{u'}, \gamma}(s,a) > Q^{\pi_{u},\gamma}(s,a)$$, which means that $$\sum^m_{j=1} \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a|s) Q^{\pi_u, \gamma} (s,a) \ne 0 \Rightarrow \exists j, g_1(u_{i_s, j}) \ne 0$$.
 
-Therefore, in the tabular case, we have $\tilde Z \subset Z$. We already have $Z \subset \tilde Z$, we can get $Z = \tilde Z$.
+Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have $$Z \subset \tilde Z$$, we can get $$Z = \tilde Z$$.
 
-- Our optimization problem is $\max_{u} J_\gamma(u)$. From an optimization perspective, $\forall u \in \tilde Z \backslash Z$, $J_\gamma(u) < \min_{u' \in Z} J_\gamma(u')$.
+- Our optimization problem is $$\max_{u} J_\gamma(u)$$. From an optimization perspective, $$\forall u \in \tilde Z \backslash Z$$, $$J_\gamma(u) < \min_{u' \in Z} J_\gamma(u')$$.
 
 ### 2.3 The Actor: Incremental Update Algorithm with Eligibility Traces
 

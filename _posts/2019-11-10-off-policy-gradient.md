@@ -47,6 +47,7 @@ This section has three section:
 - Off-PAC updates: $$u_{t+1} - u_t \approx \alpha_{u,t} \nabla_u J_{\gamma} (u_t)$$;
 
 - The problem: $$\nabla_u J_\gamma(u) = \nabla_u\left[\sum_{s\in S} d^b(s) \sum_{a \in A} \pi(a \vert s) Q^{\pi,\gamma} (s,a)\right]$$
+
   $$
   \begin{align*}
   \nabla_u J_\gamma(u) =& \nabla_u\left[\sum_{s\in S} d^b(s) \sum_{a \in A} \pi(a \vert s) Q^{\pi,\gamma} (s,a)\right] \\
@@ -55,11 +56,13 @@ This section has three section:
   	+ \pi(a\vert s) \nabla_u Q^{\pi, \gamma}(s,a) \right]
   \end{align*}
   $$
+
   We use $$\nabla_u J_\gamma(u) \approx g(u) = \sum_{s \in S} d^b(s) \sum_{a \in A}\left[\nabla_u \pi(a \vert s) Q^{\pi,\gamma}(s, a)\right]$$;
 
 - **Theorem 1** (Policy Improvement). Given any policy parameter u, let $$u' = u + \alpha g(u)$$. Then, there exists an $$\epsilon > 0$$ such that, for all positive $$\alpha < \epsilon$$, $$J_\gamma(u') \ge J_\gamma(u)$$. Further, if $$\pi$$ has a tabular representation, then $$V^{\pi_{u'}, \gamma}(s) \ge V^{\pi_u, \gamma}(s)$$ for all $$s \in S$$.
 
   **proof**: The key point is
+
   $$
   J_\gamma(u) \le \sum_{s\in S} d^b(s) \sum_{a \in A} \pi_{u'}(a \vert s) Q^{\pi_u, \gamma}(s, a) \\ 
   \le \sum_{s\in S} d^b(s) \sum_{a \in A} \pi_{u'}(a \vert s) Q^{\pi_u', \gamma}(s, a) \le J_\gamma(u')
@@ -72,12 +75,15 @@ This section has three section:
   **Errata**:
 
   We have
+
   $$
   \sum_{s\in S} d^b(s) \sum_{a \in A} \pi_{u}(a \vert s) 
   \sum_{s,a,s_{t+1}} P(s,a,s_{t+1})[R(s, a, s_{t+1}) + \gamma_{t+1} V^{\pi_u, \gamma}(s_{t+1})] \\
   \le \sum_{s\in S} d^b(s) \sum_{a\in A} \pi_{u'}(a\vert s) \sum_{s,a,s_{t+1}} P(s,a,s_{t+1})[R(s, a, s_{t+1}) + \gamma_{t+1} V^{\pi_u, \gamma}(s_{t+1})]
   $$
+
   But if we take a further step, it might not hold:
+
   $$
   \sum_a \pi_{u'}(a\vert s) \sum_{s, a, s_{t+1}}P(s, a, s_{t+1})\sum_{a_{t+1}} \pi_u(a_{t+1} \vert s_{t+1}) \cdot\\
   \sum_{s_{t+2}} P(s_{t+1}, a_{t+1}, s_{t+2})[R(s_{t+1}, a_{t+1}, s_{t+2}) + \gamma_{t+2} V^{\pi_u, \gamma}(s_{t+2})]\\
@@ -87,10 +93,12 @@ This section has three section:
   $$
   
 - **Theorem 2** (Off-Policy Policy-Gradient Theorem).
+
   $$
   \tilde Z = \{u \in \mathcal{U} \vert g(u) = 0\}\\
   Z = \{u \in \mathcal{U} \vert \nabla_u J_{\gamma}(u) = 0 \}
   $$
+
   In some function, we can guarantee $$Z \subset \tilde Z$$. Moreover, if we use a tabular representation, then $$Z = \tilde Z$$.
 
   **proof**: 
@@ -98,14 +106,18 @@ This section has three section:
   Assume there exists $$u^* \in Z$$ such that $$u^* \notin \tilde Z$$. Then $$\exists \alpha_{u,t}$$, $$J_\gamma(u^* + \alpha_{u,t} g(u^*)) > J_\gamma(u)$$, which is contradict to theorem1.
 
   In tabular representation, we let u with tabular index $$i_{s}, j$$,(where $$1 \le j \le m$$) then
+
   $$
     \sum_{s' \in S} d^b(s') \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a \vert s') Q^{\pi_u, \gamma} (s', a) \\= d^b(s) \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a\vert s) Q^{\pi_u, \gamma}(s, a) := g_1(u_{i_s, j})
   $$
+
   Similarly, we denote
+
   $$
     g_2(u_{i_s,j}) = \sum_{s'\in S} d^b(s') \sum_{a \in A} \pi_u (a \vert s') \frac{\partial}{\partial u_{i_s, k}} Q^{\pi_u, \gamma} (s', a) 
   \\= d^b(s) \sum_{a \in  A} \pi_u(a \vert s) \frac{\partial}{\partial u_{i_s, k}} Q^{\pi_u, \gamma} (s, a)
   $$
+
 If $$g_2(u_{i_s, j}) \ne 0$$, we can get $$u'$$ that satisfy $$Q^{\pi_{u'}, \gamma}(s,a) > Q^{\pi_{u},\gamma}(s,a)$$, which means that $$\sum^m_{j=1} \sum_{a \in A} \frac{\partial}{\partial u_{i_s, j}} \pi_u(a\vert s) Q^{\pi_u, \gamma} (s,a) \ne 0 \Rightarrow \exists j, g_1(u_{i_s, j}) \ne 0$$.
 
 Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have $$Z \subset \tilde Z$$, we can get $$Z = \tilde Z$$.
@@ -115,6 +127,7 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
 ### 2.3 The Actor: Incremental Update Algorithm with Eligibility Traces
 
 - The expectation of the gradient:
+
   $$
   \begin{align*}
   g(u) =& \mathbb{E} \left[ \sum_{a \in A} \nabla_u \pi(a \vert s) Q^{\pi,\gamma} (s, a) \Bigg\vert s \sim d^b \right] \\
@@ -126,11 +139,14 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
   $$
 
 - Here is a further approximation:
+
   $$
   g(u) \approx \hat g(u) = \mathbb{E}_b [\rho(s_t, a_t) \psi(s_t, a_t) (R^\lambda_t - \hat V(s_t))]
   $$
+
   where $$R^\lambda_t = r_{t+1} + (1 - \lambda) \gamma(s_{t+1}) \hat V(s_{t+1}) + \lambda \gamma(s_{t+1})\rho(s_{t+1}, a_{t+1}) R^\lambda_{t+1}$$.
 - From Backward to Forward:
+
   $$
   \begin{align*}
   \delta^\lambda_t =& R^\lambda_t - \hat V(s_t) \\
@@ -142,12 +158,14 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
   \end{align*}
   $$
 
-  ![equ1]({{ site.url }}/assets/img/Off-policy-Actor-critic/equ1.png)
+  ({{ site.url }}/assets/img/off-policy-actor-critic/equ1.png)
 
-  ![equ2]({{ site.url }}/asserts/img/Off-policy-Actor-critic/equ2.png)
+  ![equ1]({{ site.url }}/assets/img/off-policy-actor-critic/equ1.png)
+
+  ![equ2]({{ site.url }}/asserts/img/off-policy-actor-critic/equ2.png)
 
 - Algorithm 1 The Off-PAC algorithm
 
-  <img src="{{ site.url }}/asserts/img/Off-policy-Actor-critic/alg1.png" alt="alg" style="zoom: 67%;" />
+  <img src="{{ site.url }}/asserts/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 67%;" />
 
 ## 3. Convergence Analysis

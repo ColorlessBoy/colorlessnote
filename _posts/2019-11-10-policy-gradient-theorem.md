@@ -108,7 +108,7 @@ $$
 \end{align*}
 $$
 
-Let $$d^\pi(s) = \sum^\infty_{t=0} \gamma^t P(s_t = s | s_0, \pi)$$, then
+Let $$d^\pi(s) = \sum^\infty_{t=0} \gamma^t P(s_t = s \vert s_0, \pi)$$, then
 
 $$
 \nabla_\theta \mathbb{E}_{\tau\sim\pi_\theta}[R(\tau)]

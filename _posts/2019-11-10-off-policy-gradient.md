@@ -164,3 +164,4 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
 - Algorithm 1 The Off-PAC algorithm
 
   <img src="https://colorlessboy.github.io/notebook/assets/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 80%;" />
+

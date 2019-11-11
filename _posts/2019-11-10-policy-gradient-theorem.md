@@ -13,7 +13,7 @@ I write this essay because I just read a very good blog[^1], which encourages me
 
 - $$\tau = (s_0, a_0, r_0, s_1, a_1, r_1, \ldots, s_{T-1}, a_{T-1}, r_{T-1}, s_T)$$;
 - State initial distribution $$s_0 \sim \mu$$;
-- $$R(\tau) = \mathbb{E}_{tau}[\sum^{T-1}_{t=0} \gamma^t r_t]$$.
+- $$R(\tau) = \mathbb{E}_{\tau}[\sum^{T-1}_{t=0} \gamma^t r_t]$$.
 
 
 ## 2. Computing the Raw Gradient
@@ -61,12 +61,12 @@ $$
 = \nabla_\theta \mathbb{E}_{\tau\sim\pi_\theta}\left[\left( \sum^{T-1}_{t=0} r_t\right) \right]
 = \sum^{T-1}_{t=0} \nabla_\theta\mathbb{E}_{\tau\sim\pi_\theta}[r_t]
 = \sum^{T-1}_{t=0} \nabla_\theta\mathbb{E}_{\tau^t}[r_t]\\
-=& \sum^{T-1}_{t=0} \mathbb{E}_{\tau} \left[{r^t \cdot \sum^{t}_{t'=0} \nabla_\theta \log \pi_\theta(a_{t'}\vert s_{t'})}\right]
+=& \sum^{T-1}_{t=0} \mathbb{E}_{\tau} \left[{r_t \cdot \sum^{t}_{t'=0} \nabla_\theta \log \pi_\theta(a_{t'}\vert s_{t'})}\right]
 = \mathbb{E}_\tau \left[ \sum^{T-1}_{t=0} r_t \sum^t_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'} \vert  s_{t‘})\right] \\
 =& \mathbb{E}_\tau \left[ \sum^{T-1}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \sum^{T-1}_{t=t'} r_{t}  \right]
 \end{align*}
 $$
-  
+
 
 ## 3. Understanding the Baseline
 
@@ -101,12 +101,14 @@ In infinite-horizon and discounted situation, the policy gradient is
 $$
 \begin{align*}
 \nabla_\theta \mathbb{E}_{\tau\sim\pi_\theta}[R(\tau)] 
-=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\sum^{\infty}_{t=t'} \gamma^{t-t'} r_{t} - b(s_t)\right)  \right]\\
-=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(Q_\gamma(s_{t'}, a_{t'}) - b(s_t)\right)  \right].
+=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\sum^{\infty}_{t=t'} \gamma^{t} r_{t} - b(s_t)\right)  \right]\\
+=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\gamma ^{t'} Q_\gamma(s_{t'}, a_{t'}) - b(s_t)\right)  \right]\\
+=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \gamma ^{t'} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(Q_\gamma(s_{t'}, a_{t'}) - b(s_t)\right)  \right]\\
+
 \end{align*}
 $$
 
-Let $$d^\pi$$ be the stationary distribution, then
+Let $$d^\pi(s) = \sum^\infty_{t=0} \gamma^t P(s_t = s | s_0, \pi)$$, then
 
 $$
 \nabla_\theta \mathbb{E}_{\tau\sim\pi_\theta}[R(\tau)]
@@ -145,4 +147,4 @@ $$
 
 
 
-[^1]:  https://danieltakeshi.github.io/2017/03/28/going-deeper-into-reinforcement-learning-fundamentals-of-policy-gradients/ 
+[^1]: https://danieltakeshi.github.io/2017/03/28/going-deeper-into-reinforcement-learning-fundamentals-of-policy-gradients/

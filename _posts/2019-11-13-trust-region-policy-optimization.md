@@ -82,7 +82,9 @@ $$
 $$
 
 If we parameterized policy $$\pi_\theta$$, where $$\pi_\theta(a \vert  s)$$ is differentiable function with parameter vector $$\theta$$, then $$L_\pi$$ matches $$\eta$$ to first order.
-Firstly, it's easy to verify that $L_\pi(\pi) = \eta(\pi)$.
+
+Firstly, it's easy to verify that $$L_\pi(\pi) = \eta(\pi)$$.
+
 Secondly,  we have $$\nabla_\theta \eta(\pi_\theta)\vert_{\theta = \theta_0}
 = \nabla_\theta L_{\pi_{\theta_0}}(\pi_\theta) \vert_{\theta=\theta_0}$$. 
 
@@ -200,7 +202,7 @@ Note that: we can let $$\pi' = \arg\max_{\pi'} L_{\pi_{old}}(\pi')$$ and $$\pi_{
 > \end{align*}
 > $$
 
-> **Proposition 2**: $$D_{TV}(p \Arrowvert q) = \inf_\mathcal{D} \{P_\mathcal{D}(a \ne a') : (a, a') \sim \mathcal{D}\}$$, where $$\mathcal{D}$$ is any distribution whose marginal distributions are $p$ and $q$.
+> **Proposition 2**: $$D_{TV}(p \Arrowvert q) = \inf_\mathcal{D} \{P_\mathcal{D}(a \ne a') : (a, a') \sim \mathcal{D}\}$$, where $$\mathcal{D}$$ is any distribution whose marginal distributions are $$p$$ and $$q$$.
 >
 > **proof**: $$\forall A_1 \subseteq A$$ , we have
 >
@@ -227,7 +229,7 @@ Note that: we can let $$\pi' = \arg\max_{\pi'} L_{\pi_{old}}(\pi')$$ and $$\pi_{
 >
 > - With probability $$1-\beta $$, we pick the point $$(a, b)$$, where $$a \sim \frac{1}{1-\beta} \max\{p(a)-q(a), 0\}$$ and $$b \sim \frac{1}{1-\beta} \max\{q(b) - p(b), 0\}$$.
 >
-> This distribution satisfies $P(a \ne a') = D_{TV}(p \Arrowvert q)$.
+> This distribution satisfies $$P(a \ne a') = D_{TV}(p \Arrowvert q)$$.
 
 ### 3.2 Improvement Guarantee
 
@@ -308,7 +310,7 @@ $$
 
   - For each $$s_n \in S_{sub}$$, we choose K actions according to $$a_{n,k}\sim q(\cdot \vert s_n)$$; ($$q = \pi_{old}$$ works well on continuous problems or even works better. )
 
-  - Estimate $\hat Q(s_n, a_{n,k})$ by performing a rollout. (Same K random numbers, i.e., common random numbers)
+  - Estimate $$\hat Q(s_n, a_{n,k})$$ by performing a rollout. (Same K random numbers, i.e., common random numbers)
 
   - $$L_n(\theta) = \sum^K_{k=1} \pi_\theta(a_{n,k} \vert s_n) \hat Q(s_n, a_{n,k})$$;
 
@@ -318,7 +320,7 @@ $$
     L_n(\theta) = \frac{\sum^K_{k=1} \frac{\pi_\theta(a_{n,k}\vert s_n)}{\pi_{\theta_{old}}(a_{n,k}\vert s_n)} \hat Q(s_n, a_{n,k})}{\sum^K_{k=1} \frac{\pi_\theta(a_{n,k}\vert s_n)}{\pi_{\theta_{old}}(a_{n,k}\vert s_n)}}
     $$
 
-- The benefit of vine path method over the single path method is that $\hat Q$ value function has much lower variance.
+- The benefit of vine path method over the single path method is that $$\hat Q$$ value function has much lower variance.
 - Vine path method needs the system can be reset to any arbitrary state and needs much more simulation steps. And single path can be directly implemented on a physical system.
 
 ### 5.1 Efficiently Solving the Trust-Region Constraint Optimization[^2]

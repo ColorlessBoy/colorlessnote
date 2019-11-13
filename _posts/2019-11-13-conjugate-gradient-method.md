@@ -3,7 +3,7 @@ layout: mathpost
 title:  "Conjugate Gradient Method"
 date: 2019-11-13 15:36:00 +0800
 categories: mathnotes
-tags: trpo, optimization
+tags: [trpo, optimization]
 ---
 # Conjugate Gradient Method[^1]
 

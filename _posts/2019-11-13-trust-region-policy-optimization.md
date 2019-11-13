@@ -5,7 +5,6 @@ date: 2019-11-13 15:55:00 +0800
 categories: mathnotes
 tags: trpo
 ---
-# Trust Region Policy Optimization
 
 ## 1. Introduction
 
@@ -20,11 +19,11 @@ tags: trpo
 
 ## 2. Preliminaries
 
-- MDP: $\{S, A, p(s_{t+1} \vert s_t, a_t), r(s_t, a_t, s_{t+1}), p_0(s_0), \pi(a_t\vert s_t), \gamma\}$;
+- MDP: $$\{S, A, p(s_{t+1} \vert s_t, a_t), r(s_t, a_t, s_{t+1}), p_0(s_0), \pi(a_t\vert s_t), \gamma\}$$;
 
-- The distribution of initial state $s_0$ is $\rho_0$;
+- The distribution of initial state $$s_0$$ is $$\rho_0$$;
 
-- $$\Tau^\pi = \{\tau = (s_0, a_0, s_1, \ldots) \vert s_0 \sim \rho_0, a_t \sim\pi(\cdot \vert s_t), s_{t+1} \sim p(\cdot \vert s_t, a_t)\}$$;
+- $$T^\pi = \{\tau = (s_0, a_0, s_1, \ldots) \vert s_0 \sim \rho_0, a_t \sim\pi(\cdot \vert s_t), s_{t+1} \sim p(\cdot \vert s_t, a_t)\}$$;
 
 - Total reward: $$\eta(\pi) = \mathbb{E}[\sum^\infty_{t=0} \gamma^t r(s_t, a_t, s_{t+1}) \vert s_0 \sim \rho_0, a_t \sim \pi(\cdot \vert s_t), s_{t+1}\sim p(\cdot \vert s_t, a_t)]$$;
 
@@ -383,7 +382,7 @@ $$
 \theta - \theta_k = \sqrt{\frac{2\delta}{g^T H^{-1} g}} H^{-1} g.
 $$
 
-We notice that we are interested in $$H^{-1}g$$  not the $$H^{-1}$$ itself. We can use conjugate gradient method to avoid matrix inversion.
+We notice that we are interested in $$H^{-1}g$$  not the $$H^{-1}$$ itself. We can use [**conjugate gradient method**](https://colorlessboy.github.io/notebook/mathnotes/2019/11/13/conjugate-gradient-method.html) to avoid matrix inversion.
 
 ## 6 Practical Algorithm
 

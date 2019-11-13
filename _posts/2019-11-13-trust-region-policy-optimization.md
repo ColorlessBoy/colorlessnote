@@ -389,7 +389,7 @@ We notice that we are interested in $$H^{-1}g$$  not the $$H^{-1}$$ itself. We c
 ### 5.2 Confusion Clarification
 The paper says that the penalty coefficient C recommanded by the theory causes step size very small. From TRPO algorithm, we notice that small stepsize means small $$\delta$$, and small $$\delta$$ means large $$\lambda_{\min}$$.
 
-**The core reason is that theoretical penalty coefficient C is too large**.
+**The reason is that theoretical penalty coefficient C is too large**.
 
 ## 6 Practical Algorithm
 

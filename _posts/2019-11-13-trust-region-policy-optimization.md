@@ -399,7 +399,9 @@ The paper says that the penalty coefficient C recommanded by the theory causes s
 
 
 [^1]: Approximately optimal approximate reinforcement learning.
+
 [^2]: http://www.telesens.co/2018/06/09/efficiently-computing-the-fisher-vector-product-in-trpo/ (code implementation).
+
 [^3]: https://spinningup.openai.com/en/latest/algorithms/trpo.html (nice and neat blog with beautiful pseudocode).
 
 

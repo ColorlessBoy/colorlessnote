@@ -258,7 +258,7 @@ Note that: we can let $$\pi' = \arg\max_{\pi'} L_{\pi_{old}}(\pi')$$ and $$\pi_{
 > **Algorithm 1**:
 >
 > $$
-> \pi_{t+1} = \arg\min_{pi} L_{\pi_t}(\pi)-\frac{8\gamma}{(1-\gamma)^2} D^{\max}_{KL}(\pi_{t}, \pi) \cdot \max_{s,a\sim \pi} \vert A^{\pi_t}(s,a) \vert
+> \pi_{t+1} = \arg\min_{\pi} L_{\pi_t}(\pi)-\frac{8\gamma}{(1-\gamma)^2} D^{\max}_{KL}(\pi_{t}, \pi) \cdot \max_{s,a\sim \pi} \vert A^{\pi_t}(s,a) \vert
 > $$
 >
 > **proof**:
@@ -385,6 +385,11 @@ $$
 $$
 
 We notice that we are interested in $$H^{-1}g$$  not the $$H^{-1}$$ itself. We can use [**conjugate gradient method**](https://colorlessboy.github.io/notebook/mathnotes/2019/11/13/conjugate-gradient-method.html) to avoid matrix inversion.
+
+### 5.2 Confusion Clarification
+The paper says that the penalty coefficient C recommanded by the theory causes step size very small. From TRPO algorithm, we notice that small stepsize means small $$\delta$$, and small $$\delta$$ means large $$\lambda_{\min}$$.
+
+**The core reason is that theoretical penalty coefficient C is too large**.
 
 ## 6 Practical Algorithm
 

@@ -3,7 +3,7 @@ layout: mathpost
 title:  "Trust Region Policy Optimization"
 date: 2019-11-13 15:55:00 +0800
 categories: mathnotes
-tags: trpo
+tags: policy-gradient 
 ---
 
 ## 1. Introduction

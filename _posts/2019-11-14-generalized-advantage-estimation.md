@@ -14,7 +14,7 @@ tags: policy-gradient
 
 ## 2. Preliminaries
 
-- Policy gradient $$g := \nabla_\theta \mathbb{E}[\sum^\infty_{t=0} r_t] = \mathbb{E}\left\{\sum^{\infty}_{t=0} \Psi_t \nabla_\theta \log \pi_\theta(a_t\verts_t)\right\}$$. $$\Psi_t$$ has several forms: 
+- Policy gradient $$g := \nabla_\theta \mathbb{E}[\sum^\infty_{t=0} r_t] = \mathbb{E}\left\{\sum^{\infty}_{t=0} \Psi_t \nabla_\theta \log \pi_\theta(a_t\vert s_t)\right\}$$. $$\Psi_t$$ has several forms: 
 
   - Total reward of the trajectory: $$\sum^\infty_{t=0} r_t$$;
   - State-action value function: $$Q^\pi(s_t, a_t)$$;
@@ -26,36 +26,36 @@ tags: policy-gradient
 
 - We treat $$\gamma$$ as a variance reduction parameter in an undiscounted problem.
 
-  - $$V^{\pi, \gamma}(s_t):= \mathbb{E}\left[\sum^\infty_{l=0} \gamma^l r_{t+l} \vert s_{t+1:\infty}\sim P^{\pi}, a_{t:\infty} \sim \pi\right]$$;
-  - $$Q^{\pi,\gamma}(s_t, a_t) := \mathbb{E}[\sum^\infty_{l=0}\gamma^l r_{t+l} \vert s_{t+1:\infty}\sim P^\pi, a_{t+1:\infty}\sim \pi]$$;
+  - $$V^{\pi, \gamma}(s_t):= \mathbb{E}\left[\sum^\infty_{l=0} \gamma^l r_{t+l} \vert  s_{t+1:\infty}\sim P^{\pi}, a_{t:\infty} \sim \pi\right]$$;
+  - $$Q^{\pi,\gamma}(s_t, a_t) := \mathbb{E}[\sum^\infty_{l=0}\gamma^l r_{t+l} \vert  s_{t+1:\infty}\sim P^\pi, a_{t+1:\infty}\sim \pi]$$;
   - $$A^{\pi,\gamma}(s_t, a_t) = Q^{\pi, \gamma}(s_t, a_t) - V^{\pi, \gamma}(s_t)$$.
 
-- $$g^\gamma := \mathbb{E}_{s_{0:\infty}, a_{0:\infty}}\left[\sum^\infty_{t=0} A^{\pi,\gamma} \nabla_\theta\log\pi_\theta(a_t \vert s_t)\right]$$;
+- $$g^\gamma := \mathbb{E}_{s_{0:\infty}, a_{0:\infty}}\left[\sum^\infty_{t=0} A^{\pi,\gamma} \nabla_\theta\log\pi_\theta(a_t \vert  s_t)\right]$$;
 
 - **Definition 1**: The estimator $$\hat A_t$$ is $$\gamma$$-just if
   
   $$
-  \mathbb{E}_{s_{0:\infty}, a_{0:\infty}}[\hat A(s_{0:\infty}, a_{0:\infty})\nabla_\theta \log \pi_\theta(a_t \vert s_t)]\\
-  = \mathbb{E}_{s_{0:\infty}, a_{0:\infty}}[A^{\pi,\gamma}(s_t, a_t) \nabla_\theta \log \pi_\theta(a_t \vert s_t)]
+  \mathbb{E}_{s_{0:\infty}, a_{0:\infty}}[\hat A(s_{0:\infty}, a_{0:\infty})\nabla_\theta \log \pi_\theta(a_t \vert  s_t)]\\
+  = \mathbb{E}_{s_{0:\infty}, a_{0:\infty}}[A^{\pi,\gamma}(s_t, a_t) \nabla_\theta \log \pi_\theta(a_t \vert  s_t)]
   $$
 
-- **Proposition 1**: If $$\hat A_t(s_{0:\infty}, a_{0:\infty}) = Q_t(s_{t:\infty}, a_{t:\infty}) - b_t(s_{0:t}, a_{0:t-1})$$ such that $$\forall (s_t, a_t)$$, $$\mathbb{E}_{s_{t+1:\infty}, a_{t+1:\infty}\verts_t, a_t}[Q_t(s_{t:\infty}, a_{t:\infty})] = Q^{\pi, \gamma}(s_t, a_t)$$. Then $$\hat A$$ is $$\gamma$$-just.
+- **Proposition 1**: If $$\hat A_t(s_{0:\infty}, a_{0:\infty}) = Q_t(s_{t:\infty}, a_{t:\infty}) - b_t(s_{0:t}, a_{0:t-1})$$ such that $$\forall (s_t, a_t)$$, $$\mathbb{E}_{s_{t+1:\infty}, a_{t+1:\infty}\vert s_t, a_t}[Q_t(s_{t:\infty}, a_{t:\infty})] = Q^{\pi, \gamma}(s_t, a_t)$$. Then $$\hat A$$ is $$\gamma$$-just.
 
   **proof**: 
 
   $$
   \begin{align*}
-  &\mathbb{E}_{s_{0:\infty}, a_{0:\infty}}[\nabla_\theta \log \pi_\theta(a_t \vert s_t) b_t(s_{0:t}, a_{0:t-1})]\\
-  =&\mathbb{E}_{s_{0:t}, a_{0:t-1}}[\mathbb{E}_{s_{t+1:\infty}, a_{t:\infty}}[\nabla_\theta\log\pi_\theta(a_t\verts_t)] b_t(s_{0:t}, a_{0:t-1})]\\
+  &\mathbb{E}_{s_{0:\infty}, a_{0:\infty}}[\nabla_\theta \log \pi_\theta(a_t \vert  s_t) b_t(s_{0:t}, a_{0:t-1})]\\
+  =&\mathbb{E}_{s_{0:t}, a_{0:t-1}}[\mathbb{E}_{s_{t+1:\infty}, a_{t:\infty}}[\nabla_\theta\log\pi_\theta(a_t\vert s_t)] b_t(s_{0:t}, a_{0:t-1})]\\
   =&\mathbb{E}_{s_{0:t, a_{0:t-1}}}[0\cdot b_t(s_{0:t}, a_{0:t-1})] = 0
   \end{align*}
   $$
 
   $$
   \begin{align*}
-  &\mathbb{E}_{s_{0:\infty}, a_{0:\infty}}[\nabla_\theta\log\pi_\theta(a_t \vert s_t) Q_t(s_{0:\infty}, a_{0:\infty})]\\
-  =& \mathbb{E}_{s_{0:t}, a_{0:t}}[\nabla_\theta\log\pi_\theta(a_t\verts_t)\mathbb{E}_{s_{t+1:\infty}, a_{t+1:\infty}}Q_t(s_{0:\infty}, a_{0:\infty})]\\
-  =& \mathbb{E}_{s_{0:t}, a_{0:t-1}}[\nabla_\theta\log\pi_\theta(a_t \vert s_t) Q^{\pi,\gamma}(s_t, a_t)]
+  &\mathbb{E}_{s_{0:\infty}, a_{0:\infty}}[\nabla_\theta\log\pi_\theta(a_t \vert  s_t) Q_t(s_{0:\infty}, a_{0:\infty})]\\
+  =& \mathbb{E}_{s_{0:t}, a_{0:t}}[\nabla_\theta\log\pi_\theta(a_t\vert s_t)\mathbb{E}_{s_{t+1:\infty}, a_{t+1:\infty}}Q_t(s_{0:\infty}, a_{0:\infty})]\\
+  =& \mathbb{E}_{s_{0:t}, a_{0:t-1}}[\nabla_\theta\log\pi_\theta(a_t \vert  s_t) Q^{\pi,\gamma}(s_t, a_t)]
   \end{align*}
   $$
 
@@ -88,8 +88,8 @@ tags: policy-gradient
 - Using the generalized advantage estimator, we get
   
   $$
-  g^\gamma \approx \mathbb{E}\left[\sum^\infty_{t=0} \nabla_\theta \log \pi_\theta(a_t \vert s_t) \hat A^{GAE(\gamma, \lambda)}_t\right]\\
-  =\mathbb{E}\left[\sum^\infty_{t=0} \nabla_\theta \log\pi_\theta(a_t\verts_t) \sum^\infty_{l=0} (\gamma\lambda)^l \delta^V_{t+l}\right],
+  g^\gamma \approx \mathbb{E}\left[\sum^\infty_{t=0} \nabla_\theta \log \pi_\theta(a_t \vert  s_t) \hat A^{GAE(\gamma, \lambda)}_t\right]\\
+  =\mathbb{E}\left[\sum^\infty_{t=0} \nabla_\theta \log\pi_\theta(a_t\vert s_t) \sum^\infty_{l=0} (\gamma\lambda)^l \delta^V_{t+l}\right],
   $$
 
   where equality holds when $$\lambda=1$$.

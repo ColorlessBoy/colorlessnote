@@ -6,7 +6,7 @@ categories: papernotes
 tags: policy-gradient
 ---
 
-## Introduction
+## Introduction[^1]
 
 - Off-policy algorithms' advantage. The paper seems to miss the key advantage of off-policy.
 - Related works:
@@ -165,3 +165,4 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
 
   <img src="https://colorlessboy.github.io/notebook/assets/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 80%;" />
 
+[^1]:T. Degris, M. White, and R. S. Sutton, “Off-Policy Actor-Critic,” arXiv:1205.4839 [cs], Jun. 2013.

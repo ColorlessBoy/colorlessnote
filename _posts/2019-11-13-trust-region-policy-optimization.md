@@ -391,7 +391,7 @@ The paper says that the penalty coefficient C recommanded by the theory causes s
 
 **The reason is that theoretical penalty coefficient C is too large**.
 
-## 6 Practical Algorithm
+## 6 Practical Algorithm[^3]
 
 ![Pseudocode TRPO](https://spinningup.openai.com/en/latest/_images/math/5808864ea60ebc3702704717d9f4c3773c90540d.svg)
 

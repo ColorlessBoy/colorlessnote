@@ -16,7 +16,7 @@ I write this essay because I just read a very good blog[^1], which encourages me
 - $$R(\tau) = \mathbb{E}_{\tau}[\sum^{T-1}_{t=0} \gamma^t r_t]$$.
 
 
-## 2. Computing the Raw Gradient
+## 2. Computing the Raw Gradient[^3]
 
 - Two tricks before the proof:
     - Log-derivative trick:
@@ -94,6 +94,22 @@ $$
 \mathbb{E}_\tau \left[ \sum^{T-1}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\sum^{T-1}_{t=t'} r_{t} - b(s_t)\right)  \right]
 $$
 
+### 5. Expected Grad-Log-Porb Lemma[^2]
+> **Lemma 1** (Expected Grad-Log-Prob Lemma).
+>
+> $$
+> \mathbb{E}_{x\sim P_\theta} [\nabla_\theta \log P_\theta(x)] = 0
+> $$
+**proof**:
+
+$$
+\begin{align*}
+&\int_x P_\theta(x) dx = 1 \\
+\Rightarrow& \nabla_\theta \int_x P_\theta(x) = \nabla_\theta 1 = 0 \\
+&\mathbb{E}_{x \sim P_\theta} [\nabla_\theta \log P_\theta(x)] = 0.
+\end{align*}
+$$
+
 ## 4. Infinite-horizon and Discounted Situation
 
 In infinite-horizon and discounted situation, the policy gradient is
@@ -130,7 +146,14 @@ $$
 \sum_{s \in S} d^\pi(s) \sum_{a \in A} \pi(a\vert s) [Q^\pi(s,a) - f_w(s,a)]\nabla_w(f_w) = 0
 $$
 
-We construct that $$\nabla_w (f_w) = \nabla_\theta\log\pi_\theta(a\vert s)$$, which means $$f_w(s, a) = w^T \cdot \log\pi_\theta(a\vert s) $$. Then
+We construct that 
+
+$$
+\nabla_w (f_w) = \nabla_\theta\log\pi_\theta(a\vert s)$$, which means $$f_w(s, a) = w^T \cdot \log\pi_\theta(a\vert s).
+$$
+
+Then
+
 $$
 \sum_{s \in S} d^{\pi_\theta}(s) \sum_{a \in A} \pi_\theta(a\vert s) [Q^{\pi_\theta}(s,a) - f_w(s,a)]\nabla_\theta\log\pi_\theta(a\vert s) = 0\\
 \Rightarrow
@@ -147,4 +170,8 @@ $$
 
 
 
-[^1]: https://danieltakeshi.github.io/2017/03/28/going-deeper-into-reinforcement-learning-fundamentals-of-policy-gradients/
+1. https://danieltakeshi.github.io/2017/03/28/going-deeper-into-reinforcement-learning-fundamentals-of-policy-gradients/
+
+2. https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html
+
+3. Optimizing Expectations: From Deep Reinforcement Learning to Stochastic Computation Graphs, Schulman 2016(a), Chapter 2

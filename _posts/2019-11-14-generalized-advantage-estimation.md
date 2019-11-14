@@ -126,7 +126,7 @@ $$
 
 ## 6. Algorithm
 
-![Generalized_Advantage_Estimation_Alg1](https://colorlessboy.github.io/colorlessnote/assets/img/Generalized_Advantage_Estimation_Alg1.png)
+![Generalized_Advantage_Estimation_Alg1]({{'/assets/img/Generalized_Advantage_Estimation_Alg1.png' | prepend: site.baseurl}})
 
 ## 7. Discussion
 

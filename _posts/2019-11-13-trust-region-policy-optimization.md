@@ -294,7 +294,7 @@ $$
 We are now closed to the TRPO optimization. We first replace $$\sum_s \rho_{\theta_{old}}$$ with $$\frac{1}{1-\gamma}\mathbb{E}_{s \sim \rho_{\theta_{old}}}$$ and use off-policy strategy. Finally we will get
 
 $$
-\max_{\theta} \mathbb{E}_{s \sim \rho_{\theta_{old}}, a \sim q}\left[\frac{\pi(a\vert s)}{q(a\vert s)} Q^{\theta_{old}}(s, a)\right],\\
+\max_{\theta} \mathbb{E}_{s \sim \rho_{\theta_{old}}, a \sim \pi_{old}}\left[\frac{\pi(a\vert s)}{\pi_{old}(a\vert s)} Q^{\theta_{old}}(s, a)\right],\\
 s.t. \mathbb{E}_{s \sim \rho^{\theta_{old}}} [D_{KL}(\theta_{old} \Arrowvert \theta)] \le \delta.
 $$
 

@@ -160,7 +160,7 @@ The expanding subspace theorem can also proof that $$x_n = \arg\min_{x \in \math
 > = -g_k + \frac{g^T_k g_k}{g^T_{k-1} g_{k-1}}d_{k-1} (Explaination\ as\ follows);
 > $$
 >
-> - $$\alpha_k = -\frac{g^T_k d_k}{d^T_k Q d_k}$$;
+> - $$\alpha_k = -\frac{g^T_k d_k}{d^T_k Q d_k} = \frac{g^T_k g_k}{d^T_k Q d_k}$$;
 > - $$x_{k+1} = x_{k} + \alpha_k d_k $$.
 
 We would like to simplify the equation. Firstly, we notice that 

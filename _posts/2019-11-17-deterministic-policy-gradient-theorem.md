@@ -13,11 +13,13 @@ tags: policy-gradient
   - $$ \exists b, L $$, $$ \sup_s p_0(s) < b $$, $$ \sup_{a, s, s'} p(s' \vert  s,a) < b $$, $$ \sup_{a,s} r(s,a) < b $$, $$ \sup_{a,s,s'} \Arrowvert \nabla_a p(s'\vert s, a) \Arrowvert < L $$, and $$ \sup_{a,s} \Arrowvert \nabla_a r(s,a) \Arrowvert < L $$.
 
 > **Definition 1**(Deterministic Policy).
+>
 > $$
 > \mu_\theta(s) = \arg\max_a Q^{\mu_\theta}(s, a).
 > $$
 
 > **Definition 2** (Deterministic discounted policy value).
+>
 > $$
 > J(\mu_\theta) = \int_S \rho^{\mu_\theta}(s) r(s, \mu_\theta(s)) ds
 >         = \mathbb{E}_{s\sim\rho^{\mu_\theta}} [r(s, \mu_\theta(s))]\\
@@ -27,6 +29,7 @@ tags: policy-gradient
 > $$
 
 > **Theorem 1** (Deterministic Policy Gradient Theorem). If preceding conditions are satisfied, and $$ \nabla_\theta \mu_\theta(s) $$ and $$ \nabla_a Q^{\mu_\theta}(s, a) $$ exist, and that the deterministic policy gradient exists. Then,
+>
 > $$
 > \begin{align*}
 >             \nabla_\theta J(\mu_\theta) 
@@ -37,6 +40,7 @@ tags: policy-gradient
 > $$
 
 **proof**:
+
 $$
 \begin{align*}
             \nabla_\theta V ^{\mu_\theta}(s)

@@ -9,8 +9,8 @@ tags: policy-gradient
 ## 1. Deterministic Policy Gradient Theorem[^1]
 
 - Conditions
-  - $$ p(s' | s, a), \nabla_a p(s' | s, a), \mu_\theta (s), \nabla_\theta \mu_\theta(s), r(s, a), \nabla_a r(s,a), p_0(s)$$ are continuous in all parameters and variables $ s, a, s'$ and $ \theta $;
-  - $$ \exists b, L $$, $$ \sup_s p_0(s) < b $$, $$ \sup_{a, s, s'} p(s' | s,a) < b $$, $$ \sup_{a,s} r(s,a) < b $$, $$ \sup_{a,s,s'} \Arrowvert \nabla_a p(s'|s, a) \Arrowvert < L $$, and $$ \sup_{a,s} \Arrowvert \nabla_a r(s,a) \Arrowvert < L $$.
+  - $$ p(s' \vert  s, a), \nabla_a p(s' \vert  s, a), \mu_\theta (s), \nabla_\theta \mu_\theta(s), r(s, a), \nabla_a r(s,a), p_0(s)$$ are continuous in all parameters and variables $$ s, a, s'$$ and $$ \theta $$;
+  - $$ \exists b, L $$, $$ \sup_s p_0(s) < b $$, $$ \sup_{a, s, s'} p(s' \vert  s,a) < b $$, $$ \sup_{a,s} r(s,a) < b $$, $$ \sup_{a,s,s'} \Arrowvert \nabla_a p(s'\vert s, a) \Arrowvert < L $$, and $$ \sup_{a,s} \Arrowvert \nabla_a r(s,a) \Arrowvert < L $$.
 
 > **Definition 1**(Deterministic Policy).
 > $$
@@ -22,7 +22,7 @@ tags: policy-gradient
 > J(\mu_\theta) = \int_S \rho^{\mu_\theta}(s) r(s, \mu_\theta(s)) ds
 >         = \mathbb{E}_{s\sim\rho^{\mu_\theta}} [r(s, \mu_\theta(s))]\\
 > Q^{\mu_\theta} (s, a)
->         = \mathbb{E} \left\{ \sum^{\infty}_{k=1} \gamma^{k-1} r_{t+k} | s_t = s, a_t 		 = a, \pi \right\}\\
+>         = \mathbb{E} \left\{ \sum^{\infty}_{k=1} \gamma^{k-1} r_{t+k} \vert  s_t = s, a_t 		 = a, \pi \right\}\\
 > \rho ^{\mu_\theta}(s_0) = \int_S \sum^{\infty}_{t=0} \gamma^t p_0(s_0) p(s_0 \rightarrow s, t, \mu_\theta) d s_0
 > $$
 
@@ -30,9 +30,9 @@ tags: policy-gradient
 > $$
 > \begin{align*}
 >             \nabla_\theta J(\mu_\theta) 
->             =& \int_S \rho^{\mu_\theta}_\theta(s) \nabla_\theta \mu_\theta(s) \nabla_a Q ^{\mu_\theta} (s, a)|_{a=\mu_\theta} ds \\
+>             =& \int_S \rho^{\mu_\theta}_\theta(s) \nabla_\theta \mu_\theta(s) \nabla_a Q ^{\mu_\theta} (s, a)\vert _{a=\mu_\theta} ds \\
 >             =& \mathbb{E}_{s \sim \rho^{\mu_\theta}}
->             [ \nabla_\theta \mu_\theta(s) \nabla_a Q^{\mu_\theta} (s, a) |_{a=\mu_\theta} ]
+>             [ \nabla_\theta \mu_\theta(s) \nabla_a Q^{\mu_\theta} (s, a) \vert _{a=\mu_\theta} ]
 > \end{align*}
 > $$
 
@@ -41,26 +41,26 @@ $$
 \begin{align*}
             \nabla_\theta V ^{\mu_\theta}(s)
             =& \nabla_\theta Q ^{\mu_\theta}(s, \mu_\theta(s)) \\
-            =& \nabla_\theta \left( r(s, \mu_\theta(s)) + \int_S \gamma p(s'|s, \mu_\theta(s)) V^{\mu_\theta}(s') ds' \right) \\
-            =& \nabla_\theta \mu_\theta(s) \nabla_a r(s,a) |_{a=\mu_\theta(s)}
-                + \nabla_\theta \int_S \gamma p(s'|s, \mu_\theta(s)) V^{\mu_\theta}(s') ds'\\
-            =& \nabla_\theta \mu_\theta(s) \nabla_a r(s,a)|_{a=\mu_\theta(s)} \\
+            =& \nabla_\theta \left( r(s, \mu_\theta(s)) + \int_S \gamma p(s'\vert s, \mu_\theta(s)) V^{\mu_\theta}(s') ds' \right) \\
+            =& \nabla_\theta \mu_\theta(s) \nabla_a r(s,a) \vert _{a=\mu_\theta(s)}
+                + \nabla_\theta \int_S \gamma p(s'\vert s, \mu_\theta(s)) V^{\mu_\theta}(s') ds'\\
+            =& \nabla_\theta \mu_\theta(s) \nabla_a r(s,a)\vert _{a=\mu_\theta(s)} \\
              &+ \int_S \gamma \left(
-                p(s'|s,\mu_\theta(s)) \nabla_\theta V^{\mu_\theta}(s')
-                + \nabla_\theta \mu_\theta(s) \nabla_a p(s'|s, a)|_{a=\mu_\theta(s)} V^{\mu_\theta}(s')
+                p(s'\vert s,\mu_\theta(s)) \nabla_\theta V^{\mu_\theta}(s')
+                + \nabla_\theta \mu_\theta(s) \nabla_a p(s'\vert s, a)\vert _{a=\mu_\theta(s)} V^{\mu_\theta}(s')
              \right) ds'\\
-            =& \nabla_\theta \mu_\theta(s) \nabla_a \left( r(s,a) + \int_S \gamma p(s'|s,a) V^{\mu_\theta} (s') ds' \right)|_{a=\mu_\theta(s)} \\
-             &+ \int_S \gamma p(s'|s,\mu_\theta(s)) \nabla_\theta V^{\mu_\theta} (s') ds' \\
-            =& \nabla_\theta \mu_\theta(s) \nabla_a Q^{\mu_\theta} (s, a) |_{a=\mu_\theta (s)}
+            =& \nabla_\theta \mu_\theta(s) \nabla_a \left( r(s,a) + \int_S \gamma p(s'\vert s,a) V^{\mu_\theta} (s') ds' \right)\vert _{a=\mu_\theta(s)} \\
+             &+ \int_S \gamma p(s'\vert s,\mu_\theta(s)) \nabla_\theta V^{\mu_\theta} (s') ds' \\
+            =& \nabla_\theta \mu_\theta(s) \nabla_a Q^{\mu_\theta} (s, a) \vert _{a=\mu_\theta (s)}
             + \int_S \gamma p(s\rightarrow s', 1, \mu_\theta) \nabla_\theta V^{\mu_\theta} (s') ds' \\
              &\vdots\\
-            =& \int_S \sum^{\infty}_{t=0} \gamma^t p(s \rightarrow s', t, \mu_\theta) \nabla_\theta \mu_\theta(s') \nabla_a Q^{\mu_\theta} (s', a) |_{a=\mu_\theta(s')} ds'\\
+            =& \int_S \sum^{\infty}_{t=0} \gamma^t p(s \rightarrow s', t, \mu_\theta) \nabla_\theta \mu_\theta(s') \nabla_a Q^{\mu_\theta} (s', a) \vert _{a=\mu_\theta(s')} ds'\\
             \nabla_\theta J(\mu_\theta)
             =& \nabla_\theta \int_S p_0(s) V ^{\mu_\theta}(s) ds \\
             =& \int_S p_0(s) \nabla_\theta V ^{\mu_\theta}(s) ds \\
-            =& \int_S \int_S \sum^{\infty}_{t=0} \gamma^t p_0(s) p(s \rightarrow s', t, \mu_\theta) \nabla_\theta \mu_\theta(s') \nabla_a Q^{\mu_\theta} (s', a) |_{a=\mu_\theta(s')} ds' ds\\
-            =& \int_S \int_S \sum^{\infty}_{t=0} \gamma^t p_0(s_0) p(s_0 \rightarrow s, t, \mu_\theta) ds_0 \nabla_\theta \mu_\theta(s)\nabla_a Q^{\mu_\theta}(s,a)|_{a=\mu_\theta(s)} ds\\
-            =& \int_S \rho ^{\mu_\theta}(s) \nabla_\theta \mu_\theta(s) \nabla_a Q^{\mu_\theta}(s, a) |_{a=\mu_\theta(s)} ds
+            =& \int_S \int_S \sum^{\infty}_{t=0} \gamma^t p_0(s) p(s \rightarrow s', t, \mu_\theta) \nabla_\theta \mu_\theta(s') \nabla_a Q^{\mu_\theta} (s', a) \vert _{a=\mu_\theta(s')} ds' ds\\
+            =& \int_S \int_S \sum^{\infty}_{t=0} \gamma^t p_0(s_0) p(s_0 \rightarrow s, t, \mu_\theta) ds_0 \nabla_\theta \mu_\theta(s)\nabla_a Q^{\mu_\theta}(s,a)\vert _{a=\mu_\theta(s)} ds\\
+            =& \int_S \rho ^{\mu_\theta}(s) \nabla_\theta \mu_\theta(s) \nabla_a Q^{\mu_\theta}(s, a) \vert _{a=\mu_\theta(s)} ds
         \end{align*}
 $$
 

@@ -5,8 +5,6 @@ date: 2019-11-11 00:12:00 +0800
 categories: mathnotes
 tags: policy-gradient
 ---
-# Policy Gradient Theorem
-
 I write this essay because I just read a very good blog[^1], which encourages me to take notes about everything including policy gradient theorem. I have token some notes by latex mostly. I find it's more convenient by markdown.
 
 ## 1. Preliminaries
@@ -16,7 +14,7 @@ I write this essay because I just read a very good blog[^1], which encourages me
 - $$R(\tau) = \mathbb{E}_{\tau}[\sum^{T-1}_{t=0} \gamma^t r_t]$$.
 
 
-## 2. Computing the Raw Gradient[^3]
+## 2. Computing the Raw Gradient [^3]
 
 - Two tricks before the proof:
     - Log-derivative trick:
@@ -94,7 +92,7 @@ $$
 \mathbb{E}_\tau \left[ \sum^{T-1}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\sum^{T-1}_{t=t'} r_{t} - b(s_t)\right)  \right]
 $$
 
-### 5. Expected Grad-Log-Porb Lemma[^2]
+### 5. Expected Grad-Log-Porb Lemma [^2]
 > **Lemma 1** (Expected Grad-Log-Prob Lemma).
 >
 > $$
@@ -170,8 +168,8 @@ $$
 
 
 
-1. https://danieltakeshi.github.io/2017/03/28/going-deeper-into-reinforcement-learning-fundamentals-of-policy-gradients/
+[^1] https://danieltakeshi.github.io/2017/03/28/going-deeper-into-reinforcement-learning-fundamentals-of-policy-gradients/
 
-2. https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html
+[^2] https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html
 
-3. Optimizing Expectations: From Deep Reinforcement Learning to Stochastic Computation Graphs, Schulman 2016(a), Chapter 2
+[^3] Optimizing Expectations: From Deep Reinforcement Learning to Stochastic Computation Graphs, Schulman 2016(a), Chapter 2

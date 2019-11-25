@@ -86,4 +86,4 @@ $$
 f(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{x^2}{2\sigma^2}} \sim \mathcal{N}(0, \sigma^2).
 $$
 
-> [1]:https://www.bilibili.com/video/av55827033
+> Reference: https://www.bilibili.com/video/av55827033

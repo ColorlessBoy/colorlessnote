@@ -175,6 +175,7 @@ $$
 $$
 
 > **Definition 1**:
+>
 > $$
 > \begin{align*}
 > T^{(\lambda)}_\pi V =& (1-\lambda) \sum^\infty_{m=0}\lambda^m(\gamma P)^{m+1}V +  \sum^{\infty}_{m = 0} {(\gamma \lambda P)}^{m} \bar r = MV + q\\
@@ -182,6 +183,8 @@ $$
 > \left[\sum^m_{t=0} \gamma^t r(s_t, s_{t+1}) + \gamma^{m+1} V(s_{m+1}) \Big\vert s_0 = s\right]
 > \end{align*}
 > $$
+>
+> Note that $$ T^{0}_\pi V = \gamma P V + r $$.
 
 Then
 

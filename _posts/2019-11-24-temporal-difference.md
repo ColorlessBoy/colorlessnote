@@ -195,7 +195,7 @@ $$
 > **Lemma 5**: If $$ \Pi = \Phi(\Phi^T D \Phi)^{-1} \Phi^T D$$ satisfies
 >
 > $$
-> \Arrowvert \Phi V - V \Arrowvert_{D} = \min_{\theta}\Arrowvert \Phi \theta - V \Arrowvert_{D}.
+> \Arrowvert \Pi V - V \Arrowvert_{D} = \min_{\theta}\Arrowvert \Phi \theta - V \Arrowvert_{D}.
 > $$
 
 Then

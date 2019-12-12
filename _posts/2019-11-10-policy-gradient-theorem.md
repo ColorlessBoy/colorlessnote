@@ -92,7 +92,7 @@ $$
 \mathbb{E}_\tau \left[ \sum^{T-1}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\sum^{T-1}_{t=t'} r_{t} - b(s_t)\right)  \right]
 $$
 
-### 5. Expected Grad-Log-Porb Lemma [^2]
+### Expected Grad-Log-Porb Lemma[^2]
 > **Lemma 1** (Expected Grad-Log-Prob Lemma).
 >
 > $$
@@ -115,10 +115,9 @@ In infinite-horizon and discounted situation, the policy gradient is
 $$
 \begin{align*}
 \nabla_\theta \mathbb{E}_{\tau\sim\pi_\theta}[R(\tau)] 
-=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\sum^{\infty}_{t=t'} \gamma^{t} r_{t} - b(s_t)\right)  \right]\\
-=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\gamma ^{t'} Q_\gamma(s_{t'}, a_{t'}) - b(s_t)\right)  \right]\\
-=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \gamma ^{t'} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(Q_\gamma(s_{t'}, a_{t'}) - b(s_t)\right)  \right]\\
-
+=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\sum^{\infty}_{t=t'} \gamma^{t} r_{t} - b(s_{t'})\right)  \right]\\
+=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(\gamma ^{t'} Q_\gamma(s_{t'}, a_{t'}) - b(s_{t'})\right)  \right]\\
+=& \mathbb{E}_\tau \left[ \sum^{\infty}_{t'=0} \gamma ^{t'} \nabla_\theta\log\pi_\theta(a_{t'}\vert s_{t'}) \left(Q_\gamma(s_{t'}, a_{t'}) - b(s_{t'})\right)  \right]
 \end{align*}
 $$
 

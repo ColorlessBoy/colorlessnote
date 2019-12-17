@@ -15,7 +15,7 @@ tags: off-policy
   - $$r_\pi(s) = \sum_a \pi(a\vert s) \sum_{s'} p(s' \vert s, a) r(s, a, s')$$.
 - In other words, we can see MDP as a function mapping a policy $$\pi \in \Pi$$ to a Markov chain: $$MDP: \Pi \rightarrow MC$$, or $$MDP = \{\pi \rightarrow MC_{\pi}\}$$ where $$MC_\pi = \{\tau=(s_0, a_0, r_0, s_t\ldots)\vert s_0\sim p_0, a_t \sim \pi(\cdot \vert s_t), s_{t+1}\sim p_\pi(\cdot\vert s_t, a_t), r_{t} \sim r_\pi(s_t, a_t, s_{t+1})\}$$;
   - We denote $$MC_\pi$$'s stationary distribution is $$d_\pi$$ and $$D_\pi = diag(d_\pi)$$;
-  - State-transition space: $$MC2_\pi = \{(s, a, r, s')| s \sim d_\pi, a \sim \pi(\cdot\vert s), r \sim r(s, a, s'), s'\sim p(\cdot \vert s, a)\}$$;
+  - State-transition space: $$MC2_\pi = \{(s, a, r, s')\vert  s \sim d_\pi, a \sim \pi(\cdot\vert s), r \sim r(s, a, s'), s'\sim p(\cdot \vert s, a)\}$$;
   - The key assumption $$MC_\pi$$ can break into $$MC2_\pi$$.
 - Criterion:
   - $$R(\tau) = \sum^{T}_{t=0} \gamma^t r_t$$;
@@ -71,9 +71,9 @@ tags: off-policy
 
 - Intuitively, we are only interested in the fixed point of bellman operator $$V = T^\pi V$$, which is exactly $$V^\pi$$, no matter what norm the algorithm uses.
 - Important sampling method in state-transition space:
-  - $$MC2_\pi = \{(s, a, r, s')| s \sim d_\pi, a \sim \pi(\cdot\vert s), r \sim r(s, a, s'), s'\sim p(\cdot \vert s, a)\}$$;
-  - $$MC2_\mu = \{(s, a, r, s')| s \sim d_\mu, a \sim \mu(\cdot\vert s), r \sim r(s, a, s'), s'\sim p(\cdot \vert s, a)\}$$;
-  - $$MC2_{\pi, \mu} = \{(s, a, r, s')| s \sim d_\mu, a \sim \pi(\cdot\vert s), r \sim r(s, a, s'), s'\sim p(\cdot \vert s, a)\}$$.
+  - $$MC2_\pi = \{(s, a, r, s')\vert  s \sim d_\pi, a \sim \pi(\cdot\vert s), r \sim r(s, a, s'), s'\sim p(\cdot \vert s, a)\}$$;
+  - $$MC2_\mu = \{(s, a, r, s')\vert  s \sim d_\mu, a \sim \mu(\cdot\vert s), r \sim r(s, a, s'), s'\sim p(\cdot \vert s, a)\}$$;
+  - $$MC2_{\pi, \mu} = \{(s, a, r, s')\vert  s \sim d_\mu, a \sim \pi(\cdot\vert s), r \sim r(s, a, s'), s'\sim p(\cdot \vert s, a)\}$$.
 - $$ V(s_t) = V(s_t) + \alpha \rho_t(r_t + \gamma V(s_{t+1}) - V(s_t))$$;
   - Correct samples from $$MC2_\mu$$ to $$MC2_{\pi, \mu}$$: $$\rho_t = \frac{\pi(a_t \vert s_t)}{\mu(a_t \vert s_t)}$$;(Old method: GTD, GTD2, TDC)
   - Correct samples from $$MC2_\mu$$ to $$MC2_\pi$$: $$\rho_t = \frac{d_\pi(s_t)}{d_\mu(s_t)} \cdot \frac{\pi(a_t\vert s_t)}{\mu(a_t \vert s_t)}$$. (New method: 2018~2019)
@@ -87,8 +87,8 @@ tags: off-policy
   <img src="C:\Users\pengl\Documents\md-notes\pic\Emphaic_TD_1.png" alt="Emphaic_TD_1" style="zoom:50%;" />
 
 - A good conclusion of TD-algorithm:
-  ![1_1]({{'/assets/img/GTD/1_1.png' | prepend: site.baseurl}})
-  ![1_2]({{'/assets/img/GTD/1_2.png' | prepend: site.baseurl}})
+  ![1_1]({{'/assets/img/GTD/1_1.png' \vert  prepend: site.baseurl}})
+  ![1_2]({{'/assets/img/GTD/1_2.png' \vert  prepend: site.baseurl}})
 
 #### 2.2.4 Gradient TD Algorithm
 

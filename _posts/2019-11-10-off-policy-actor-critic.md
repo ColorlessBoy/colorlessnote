@@ -165,4 +165,4 @@ Therefore, in the tabular case, we have $$\tilde Z \subset Z$$. We already have 
 
   <img src="{{site.baseurl}}/assets/img/off-policy-actor-critic/alg1.png" alt="alg" style="zoom: 80%;" />
 
-[^1]:T. Degris, M. White, and R. S. Sutton, “Off-Policy Actor-Critic,” arXiv:1205.4839 [cs], Jun. 2013.
+[1]:T. Degris, M. White, and R. S. Sutton, “Off-Policy Actor-Critic,” arXiv:1205.4839 [cs], Jun. 2013.

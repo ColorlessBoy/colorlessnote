@@ -52,7 +52,7 @@ $$
 
 > **Example 1**:
 >
-> <img src="C:\Users\pengl\Documents\md-notes\pic\Emphaic_TD_1.png" alt="Emphaic_TD_1" style="zoom:50%;" />
+> <img src="{{site.baseurl}}/assets/img/emphatic_td_1.png" alt="emphatic_td_1" style="zoom: 50%;" />
 >
 > So $$ d_\mu = [0.5, 0.5]^T$$ and $$ P_\pi = \begin{bmatrix} 0 & 1 \\ 0 & 1\end{bmatrix}$$:
 >

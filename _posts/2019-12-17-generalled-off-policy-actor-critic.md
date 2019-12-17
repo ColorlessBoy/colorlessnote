@@ -3,7 +3,7 @@ layout: mathpost
 title:  "Generalized Off-Policy Actor-Critic"
 date: 2019-12-17 20:43:00 +0800
 categories: papernotes
-tags: policy-gradient, off-policy
+tags: policy-gradient off-policy
 ---
 
 # Generalized Off-Policy Actor-Critic

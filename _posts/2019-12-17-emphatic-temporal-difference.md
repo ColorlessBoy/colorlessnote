@@ -3,7 +3,7 @@ layout: mathpost
 title:  "An Emphatic Approach for the Problem of Off-policy Temporal-difference Learning"
 date: 2019-12-17 20:37:00 +0800
 categories: papernotes
-tags: temporal-difference, off-policy
+tags: temporal-difference off-policy
 ---
 
 # An Emphatic Approach for the Problem of Off-policy Temporal-difference Learning

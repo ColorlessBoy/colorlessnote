@@ -2,7 +2,7 @@
 layout: mathpost
 title:  "Temporal Difference Algorithm"
 date: 2019-11-24 23:50:00 +0800
-categories: mathnote
+categories: mathnotes
 tags: temporal-difference 
 ---
 

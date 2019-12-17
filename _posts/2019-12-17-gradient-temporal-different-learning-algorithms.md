@@ -3,7 +3,7 @@ layout: mathpost
 title:  "Gradient Temporal-Different Learning Algorithms"
 date: 2019-12-17 21:05:00 +0800
 categories: papernotes
-tags: temporal-difference, off-policy
+tags: temporal-difference off-policy
 ---
 # Gradient Temporal-Different Learning Algorithms
 

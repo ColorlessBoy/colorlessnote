@@ -3,7 +3,7 @@ layout: mathpost
 title:  "An Off-policy Policy Gradient Theorem Using Emphatic Weightings"
 date: 2019-12-17 20:24:00 +0800
 categories: papernotes
-tags: policy-gradient, off-policy
+tags: policy-gradient off-policy
 ---
 
 # An Off-policy Policy Gradient Theorem Using Emphatic Weightings

@@ -3,7 +3,7 @@ layout: mathpost
 title:  "Off-Policy Deep Reinforcement Learning by Bootstrapping the Covariate Shift"
 date: 2019-12-17 20:49:00 +0800
 categories: papernotes
-tags: policy-gradient, off-policy
+tags: policy-gradient off-policy
 ---
 # Off-Policy Deep Reinforcement Learning by Bootstrapping the Covariate Shift
 

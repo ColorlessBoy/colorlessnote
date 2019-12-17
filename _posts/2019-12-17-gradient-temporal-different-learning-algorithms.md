@@ -1,7 +1,7 @@
 ---
 layout: mathpost
 title:  "Gradient Temporal-Different Learning Algorithms"
-date: 2019-12-17 20:59:00 +0800
+date: 2019-12-17 21:05:00 +0800
 categories: papernotes
 tags: temporal-difference, off-policy
 ---
@@ -22,7 +22,7 @@ tags: temporal-difference, off-policy
 - Related works:
   - Importance sampling idea: high variance;
   - Residual gradient method: double-sampling, not reliable when using function approximation;
-  - LSTD, LSPI: $O(d^2)$ complexity.
+  - LSTD, LSPI: $$O(d^2)$$ complexity.
 - Two good pictures present in the paper that describe the contributions of this paper.
   ![1_1]({{'/assets/img/GTD/1_1.png' | prepend: site.baseurl}})
   ![1_2]({{'/assets/img/GTD/1_2.png' | prepend: site.baseurl}})
@@ -46,15 +46,15 @@ Several important properties of eligibility traces are as follows:
 
 Many TD-learning methods based on gradient-descent, are not true gradient-descent methods;
 
-- Target objection: $MSE(\theta) = \mathbb{E} [(V^\pi(S_t) - V_\theta(S_t))^2]$. Because we can't get $V^\pi(S_t)$, we use $R_t + \gamma V_{\theta}(S_t)$ instead;
+- Target objection: $$MSE(\theta) = \mathbb{E} [(V^\pi(S_t) - V_\theta(S_t))^2]$$. Because we can't get $$V^\pi(S_t)$$, we use $$R_t + \gamma V_{\theta}(S_t)$$ instead;
 - Residual gradient method:
-  - $J(\theta) = \Arrowvert T^\pi V_\theta - V_\theta \Arrowvert^2_{\mu} = \mathbb{E}_{S_{t}\sim \mu}\{[\mathbb{E}_{S_{t+1}}[\delta_t \vert  S_t]]^2 \}$;
+  - $$J(\theta) = \Arrowvert T^\pi V_\theta - V_\theta \Arrowvert^2_{\mu} = \mathbb{E}_{S_{t}\sim \mu}\{[\mathbb{E}_{S_{t+1}}[\delta_t \vert  S_t]]^2 \}$$;
   
     - This objective is not the exact objective that RG methods uses.
   
-  - $-\frac{1}{2} \nabla_\theta J(\theta) = E_{S_{t}\sim \mu}\{\mathbb{E}_{S_{t+1}}[\delta_t \cdot (\nabla_\theta V_\theta(S_t) - \gamma\nabla_\theta V_\theta(S_{t+1}))\vert S_t]\}$; 
+  - $$-\frac{1}{2} \nabla_\theta J(\theta) = E_{S_{t}\sim \mu}\{\mathbb{E}_{S_{t+1}}[\delta_t \cdot (\nabla_\theta V_\theta(S_t) - \gamma\nabla_\theta V_\theta(S_{t+1}))\vert S_t]\}$$; 
   
-  - But RG uses single sample, $\Delta \theta = \alpha_t \delta_t(\nabla_\theta(S_t) - \nabla_\theta V_\theta(S_{t+1}))$, which is considered to inferior to TD-solution. Properly speaking, $J(\theta) = \mathbb{E}_{S_t} [\delta^2_t(\theta)]$.
+  - But RG uses single sample, $$\Delta \theta = \alpha_t \delta_t(\nabla_\theta(S_t) - \nabla_\theta V_\theta(S_{t+1}))$$, which is considered to inferior to TD-solution. Properly speaking, $$J(\theta) = \mathbb{E}_{S_t} [\delta^2_t(\theta)]$$.
   
   - Here is a clear prove:
 
@@ -75,15 +75,15 @@ Many TD-learning methods based on gradient-descent, are not true gradient-descen
 ## Chapter3 Objective Function for Temporal-Different Learning
 
 - Possible objective functions:
-  - Mean-square Error: $MSE(\theta) = \Arrowvert V_\theta(s) - V^\pi(s)\Arrowvert^2_\mu$;
+  - Mean-square Error: $$MSE(\theta) = \Arrowvert V_\theta(s) - V^\pi(s)\Arrowvert^2_\mu$$;
   
-  - Mean-square Bellman Error: $MSBE(\theta) = \Arrowvert V_\theta - T^\pi V_\theta \Arrowvert^2_\mu$;
-    - $MSBE(\theta)$ result could be inferior to the TD-solution;
+  - Mean-square Bellman Error: $$MSBE(\theta) = \Arrowvert V_\theta - T^\pi V_\theta \Arrowvert^2_\mu$$;
+    - $$MSBE(\theta)$$ result could be inferior to the TD-solution;
     - double sampling;
     - the space of states is too big;
     - Most of TD algorithm does not converge to the minimum of MSBE objective.
     
-  - Mean-square Temporal-difference Error: $MSTDE(\theta) = \mathbb{E}_{S_t}[\delta^2_t(\theta)]$; such as RG;
+  - Mean-square Temporal-difference Error: $$MSTDE(\theta) = \mathbb{E}_{S_t}[\delta^2_t(\theta)]$$; such as RG;
     
     - The major problem with this objective function is its inferior results.   
     
@@ -93,30 +93,30 @@ Many TD-learning methods based on gradient-descent, are not true gradient-descen
       MSTDE(\theta)= \sum_{s}\mu(s)\sum_{a}\pi(a \vert s)\sum_{s'}p(s'\vert s, a)\left([r(s,a) + \gamma V_\theta(s') - V_\theta(s)]\right)^2
       $$
     
-  - Mean-square Projected Temporal-difference Error: $MSPTDE(\theta) = \Arrowvert V_\theta - \Pi T^\pi V_\theta \Arrowvert_\mu$; such as LSTD and GTD;
+  - Mean-square Projected Temporal-difference Error: $$MSPTDE(\theta) = \Arrowvert V_\theta - \Pi T^\pi V_\theta \Arrowvert_\mu$$; such as LSTD and GTD;
   
     - In paper's example, it's the only objective to get the true result.
   
-  - **The norm of the expected TD update **: $NEU(\theta) = \mathbb{E}_{S_t}[\delta(\theta)\phi]^T \mathbb{E}_{S_t}[\delta(\theta)\phi]$.
+  - **The norm of the expected TD update **: $$NEU(\theta) = \mathbb{E}_{S_t}[\delta(\theta)\phi]^T \mathbb{E}_{S_t}[\delta(\theta)\phi]$$.
   
     - Result in TD(0) solution too.
-- We provide  feature-based $MSBE$ objective function: $J(\theta) = E_{S_t}\{ [E_{S_{t+1}}( \delta_t \vert  \phi(S_t) )]^2\}$.
-  - $-\frac{1}{2} \nabla_\theta J(\theta) = \mathbb E_{S_{t}}\{\mathbb{E}_{S_{t+1}}[\delta_t \cdot (\nabla_\theta V_\theta(S_t) - \nabla_\theta V_\theta(S_{t+1}))\vert \phi(S_t)]\}$;
-  - If $V_\theta(S) = \theta^T \phi(S)$, $-\frac{1}{2} \nabla_\theta J(\theta) = \mathbb E_{S_{t}}\{\mathbb{E}_{S_{t+1}}[\delta_t \cdot (\phi(S_t) - \gamma\phi(S_{t+1}))\vert \phi(S_t)]\}$;
+- We provide  feature-based $$MSBE$$ objective function: $$J(\theta) = E_{S_t}\{ [E_{S_{t+1}}( \delta_t \vert  \phi(S_t) )]^2\}$$.
+  - $$-\frac{1}{2} \nabla_\theta J(\theta) = \mathbb E_{S_{t}}\{\mathbb{E}_{S_{t+1}}[\delta_t \cdot (\nabla_\theta V_\theta(S_t) - \nabla_\theta V_\theta(S_{t+1}))\vert \phi(S_t)]\}$$;
+  - If $$V_\theta(S) = \theta^T \phi(S)$$, $$-\frac{1}{2} \nabla_\theta J(\theta) = \mathbb E_{S_{t}}\{\mathbb{E}_{S_{t+1}}[\delta_t \cdot (\phi(S_t) - \gamma\phi(S_{t+1}))\vert \phi(S_t)]\}$$;
 
 - I have a lot of questions for the rest of this chapter.
 
 ## Chapter4 Off-policy Formulation of Temporal-difference Learning
 
-- Target policy $\pi(s)$, behavior policy $\pi_b(s)$, and stationary state distribution $\mu P = \mu$;
+- Target policy $$\pi(s)$$, behavior policy $$\pi_b(s)$$, and stationary state distribution $$\mu P = \mu$$;
 - This section has serious problem, too;
-- $\mathbb{E}^{\pi}[\delta\phi] = \sum_{s,a,s'} \mu_\pi \frac{\pi(a\vert s)}{\pi_{b}(a\vert s)} \pi_b(a\vert s) P(s' \vert  s, a) \delta(s, a, s' \vert  \theta) \phi(s)$;
-- $\mathbb{E}^{\pi_b}[ \frac{\pi(a\vert s)}{\pi_b{(a\vert s)}} \delta\phi] = \sum_{s,a,s'} \mu_b \frac{\pi(a\vert s)}{\pi_b(a\vert s)} \pi_b(a\vert s) P(s'\vert s,a) \delta(s, a, s' \vert  \theta) \phi(s)$;
+- $$\mathbb{E}^{\pi}[\delta\phi] = \sum_{s,a,s'} \mu_\pi \frac{\pi(a\vert s)}{\pi_{b}(a\vert s)} \pi_b(a\vert s) P(s' \vert  s, a) \delta(s, a, s' \vert  \theta) \phi(s)$$;
+- $$\mathbb{E}^{\pi_b}[ \frac{\pi(a\vert s)}{\pi_b{(a\vert s)}} \delta\phi] = \sum_{s,a,s'} \mu_b \frac{\pi(a\vert s)}{\pi_b(a\vert s)} \pi_b(a\vert s) P(s'\vert s,a) \delta(s, a, s' \vert  \theta) \phi(s)$$;
 
 ## Chapter5 Gradient Temporal-difference Learning with Linear function approximation
 
 - GTD algorithm:
-  - $NEU(\theta) = \mathbb{E}_{S_t}[\delta \phi]^T \mathbb{E}_{S_t}[\delta\phi]$; (The norm of the expected TD update).
+  - $$NEU(\theta) = \mathbb{E}_{S_t}[\delta \phi]^T \mathbb{E}_{S_t}[\delta\phi]$$; (The norm of the expected TD update).
 
     $$
     \begin{align*}
@@ -129,11 +129,11 @@ Many TD-learning methods based on gradient-descent, are not true gradient-descen
     \end{align*}
     $$
   
-  - $-\frac{1}{2}\nabla_{\theta} NEU(\theta) = \mathbb{E}_{S_t}[(\phi - \gamma \phi')\phi^T] \cdot \mathbb{E}_{S_t}[\delta(\theta) \phi]$;
+  - $$-\frac{1}{2}\nabla_{\theta} NEU(\theta) = \mathbb{E}_{S_t}[(\phi - \gamma \phi')\phi^T] \cdot \mathbb{E}_{S_t}[\delta(\theta) \phi]$$;
   
-  - $\theta_{k+1} = \theta_k + \alpha_k(\phi_k - \gamma \phi'_k)\phi^T_k u_k$;
+  - $$\theta_{k+1} = \theta_k + \alpha_k(\phi_k - \gamma \phi'_k)\phi^T_k u_k$$;
   
-  - $u_{k+1} = u_k + \beta_k(\delta_k \phi_k - u_k)$;
+  - $$u_{k+1} = u_k + \beta_k(\delta_k \phi_k - u_k)$$;
   
   - If we take exactly steps instead of stochastic steps, we can get
 
@@ -145,10 +145,10 @@ Many TD-learning methods based on gradient-descent, are not true gradient-descen
   
     > From concepts of numerical analysis, the condition number of A$A is always worse than A—notice -A is the underlying matrix for the expected TD(0) update. As such, GTD’s asymptotic rate of convergence is usually much worse than TD(0) on problems where TD(0) converges.  
 - GTD2 algorithm:
-  - $J(\theta) = \Arrowvert V_\theta - \Pi T^\pi V_\theta\Arrowvert^2_\mu$, where $\Pi = \Phi (\Phi^T D \Phi)^{-1}\Phi^T D$, then $J(\theta) = (\phi^T D (TV_\theta - V_\theta))^T (\phi^T D \phi)^{-1} \phi^T D(TV_\theta - V_\theta) = \mathbb E_{\mu}[\delta(\theta) \phi]^T (\mathbb{E}_\mu[\phi \phi^T])^{-1} \mathbb{E}_\mu[\delta(\theta) \phi]$;
-  - $-\frac{1}{2}\nabla J(\theta) = \mathbb{E}_{\mu}[(\phi - \gamma \phi') \phi^T]\cdot (\mathbb{E}_{\mu}[\phi\phi^T])^{-1}\cdot\mathbb E_{\mu}[\delta(\theta)\phi]$;
-  - $\theta_{k+1} = \theta_k + \alpha_k(\phi_k - \gamma \phi'_k)\phi^T_k w_k$;
-  - $w_{k+1} = w_k + \beta_k ( \delta_k - \phi^T_k w_k)\phi_k$;
+  - $$J(\theta) = \Arrowvert V_\theta - \Pi T^\pi V_\theta\Arrowvert^2_\mu$$, where $$\Pi = \Phi (\Phi^T D \Phi)^{-1}\Phi^T D$$, then $$J(\theta) = (\phi^T D (TV_\theta - V_\theta))^T (\phi^T D \phi)^{-1} \phi^T D(TV_\theta - V_\theta) = \mathbb E_{\mu}[\delta(\theta) \phi]^T (\mathbb{E}_\mu[\phi \phi^T])^{-1} \mathbb{E}_\mu[\delta(\theta) \phi]$$;
+  - $$-\frac{1}{2}\nabla J(\theta) = \mathbb{E}_{\mu}[(\phi - \gamma \phi') \phi^T]\cdot (\mathbb{E}_{\mu}[\phi\phi^T])^{-1}\cdot\mathbb E_{\mu}[\delta(\theta)\phi]$$;
+  - $$\theta_{k+1} = \theta_k + \alpha_k(\phi_k - \gamma \phi'_k)\phi^T_k w_k$$;
+  - $$w_{k+1} = w_k + \beta_k ( \delta_k - \phi^T_k w_k)\phi_k$$;
     - $$w = \mathbb{E}[\phi \phi^T]^{-1} \mathbb{E}[\delta(\theta) \phi]$$ because the convergence point $$w^*$$ satisfies $$\mathbb{E}_\mu[\delta \phi] = \mathbb{E}_\mu[\phi \phi^T] w^* $$;
 - TDC algorithm (C for correction):
   - We change a lit bit of  preceding objective:
@@ -162,9 +162,9 @@ Many TD-learning methods based on gradient-descent, are not true gradient-descen
     \end{align*}
     $$
   
-  - $\theta_{k+1} = \theta_k + \alpha_k(\delta_k \phi_k - \gamma \phi'_k \phi^T_k w_k)$;
+  - $$\theta_{k+1} = \theta_k + \alpha_k(\delta_k \phi_k - \gamma \phi'_k \phi^T_k w_k)$$;
   
-  - $w_{k+1} = w_k + \beta_k ( \delta_k - \phi^T_k w_k)\phi_k$;
+  - $$w_{k+1} = w_k + \beta_k ( \delta_k - \phi^T_k w_k)\phi_k$$;
   
   - >The first term is exactly TD(0) with linear function approximation;
     >
@@ -197,8 +197,8 @@ Many TD-learning methods based on gradient-descent, are not true gradient-descen
     - $$w_{t+1} = w_t + \beta_t(\rho_t \delta_t - \phi^T_t w_t)\phi_t$$;
 
 - Similarly, off-policy GTD algorithm:
-  - $\theta_{k+1} = \theta_k + \alpha_k\rho_t(\phi_k - \gamma \phi'_k)\phi^T_k w_k$;
-  - $w_{k+1} = w_k + \beta_k ( \rho_t\delta_k - \phi^T_k w_k)\phi_k$;
+  - $$\theta_{k+1} = \theta_k + \alpha_k\rho_t(\phi_k - \gamma \phi'_k)\phi^T_k w_k$$;
+  - $$w_{k+1} = w_k + \beta_k ( \rho_t\delta_k - \phi^T_k w_k)\phi_k$$;
 
 ### 5.3 The proof of convergence
 
@@ -558,3 +558,4 @@ $$
 $$
 
 
+[1]H. Maei, “Gradient Temporal-Difference Learning Algorithms,”

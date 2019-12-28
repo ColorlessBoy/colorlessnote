@@ -35,14 +35,14 @@ $$
 Let $$\{d_0, d_1, \ldots, d_{n-1}\}$$ vectors be Q-conjugate, then $$x^*$$ can be written as
 
 $$
-x^* = \sum^{n-1}_{i=1} \alpha_i d_i.
+x^* = \sum^{n-1}_{i=0} \alpha_i d_i.
 $$
 
 So we need to calculate $$\alpha_i$$ for $$x^*$$. The beautiful property is that
 
 $$
-d^T_k b = d^T_kQx^* = \sum^{n-1}_{i=1}\alpha_i d^T_kQd_i = \alpha_k d^T_k Q d_k,\\
-\Rightarrow \alpha_k = \frac{d^T_k b}{d^T_k Q d_k}, x^* = \sum^{n-1}_{i=1}\frac{d^T_ib}{d^T_iQd_i} d_i.
+d^T_k b = d^T_kQx^* = \sum^{n-1}_{i=0}\alpha_i d^T_kQd_i = \alpha_k d^T_k Q d_k,\\
+\Rightarrow \alpha_k = \frac{d^T_k b}{d^T_k Q d_k}, x^* = \sum^{n-1}_{i=0}\frac{d^T_ib}{d^T_iQd_i} d_i.
 $$
 
 **Superisingly, the matrix inversion is unnecessary**.

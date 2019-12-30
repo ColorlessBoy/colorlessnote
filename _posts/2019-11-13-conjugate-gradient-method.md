@@ -75,7 +75,7 @@ $$
 If we want $$x_n = x^*$$, how to choose $$a_i$$? Here is some discussion.
 
 $$
-d^T_k Q (x^* - x_0)= d^T_k Q (x^n - x_0) = d^T_k Q \cdot \sum^{n-1}_{i=0}\alpha_i d_{i} = \alpha_k d^T_k Q d_k \\
+d^T_k Q (x^* - x_0)= d^T_k Q (x_n - x_0) = d^T_k Q \cdot \sum^{n-1}_{i=0}\alpha_i d_{i} = \alpha_k d^T_k Q d_k \\
 \Rightarrow \alpha_k = \frac{d^T_k Q (x^* - x_0)}{d^T_k Q d_k}
 $$
 
@@ -119,7 +119,7 @@ $$
 
 We then need to proof the second equation.
 
-Because the function is strongly convex, if we can guarantee that $$g_k \perp \beta_k$$, then the second equation is proofed.
+Because the function is strongly convex, if we can guarantee that $$f'(x_k) = g_k \perp \beta_k$$, then the second equation is proofed.
 
 We will proof $$g_k \perp \mathcal{B}_k$$ by induction:
 

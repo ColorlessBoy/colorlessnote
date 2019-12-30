@@ -151,7 +151,7 @@ The expanding subspace theorem can also proof that $$x_n = \arg\min_{x \in \math
 >
 > For any $$k (\ge 0)$$ steps: 
 >
-> - $$g_k = Q x_k - b$$;
+> - $$g_k = Q x_k - b = g_{k-1} + \alpha_{k-1} Q d_{k-1}$$;
 >
 > - Because $$g_k \perp \{d_0, \ldots, d_{k-1}\}$$, therefore we can exactly construct $$d_k$$ from $$\{d_0, \ldots, d_{k-1}, g_k\}$$:
 

@@ -166,7 +166,7 @@ The algorithm is a V-based method.
   J(\theta_Q) = \mathbb{E}_{(s, a) \sim \mathcal{D}} \left\{\frac{1}{2} (\sum_{s'} p(s' \vert s, a)\left(r(s, a, s') + \gamma V(s';\theta_V)\right) - Q(s, a; \theta_Q) )^2 \right\};
   $$
 
-- We want $$\pi(a \vert s; \theta_\pi) = \pi^*_{Q, soft}(a \vert s) = \frac{Q(s, a; \theta_Q)}{\sum_{a'} Q(s, a'; \theta_Q)}$$;
+- We want $$\pi(a \vert s; \theta_\pi) = \pi^*_{Q, soft}(a \vert s) = \frac{\exp(\frac{1}{\alpha}Q(s, a; \theta_Q))}{\sum_{a'} \exp(\frac{1}{\alpha} Q(s, a'; \theta_Q))}$$;
 
   $$
   \begin{align*}

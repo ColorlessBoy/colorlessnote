@@ -204,7 +204,19 @@ It's based on Q-based method.
 
 - Actor: And $$\pi(a \vert s; \theta_\pi) = \frac{Q(s, a; \theta_Q)}{\sum_{a'} Q(s, a'; \theta_Q)}$$.
 
+## 3. Network Trick
 
+- $$mean, std = Net(state)$$;
+- $$normal = Normal(mean, std)$$;
+- $$y \sim normal$$;
+- $$a = \tanh(y) \Rightarrow y=\tanh^{-1} (a) = \frac{1}{2} \ln\frac{1+a}{1-a}$$;
+- $$p_{a}(a) = p_y(\tanh^{-1}(a)) * \frac{\mathrm {d} \tanh^{-1}(a)}{\mathrm{d} a} = p_y(y) \frac{1}{1-\tanh^2 y}$$.
+
+### 3.1 KL-Divergence
+
+$$
+\begin{align*}&D_{KL} \{ p_a(a) \Vert q_a(a)\} \\=& \int_{-1}^{+1} p_a(a;\mu_p, \sigma_p) [\ln(p_a(a; \mu_p, \sigma_p)) - \ln(p_a(a;\mu_q, \sigma_q)) ]da\\=&\int_{-\infty}^{\infty} \frac{p_y(y)}{1-\tanh^2 y}\left[\ln (p_y(y;\mu_p, \sigma_p)) - \ln(p_y(y;\mu_q, \sigma_q))\right] d \tanh(y) \\=& \int_{-\infty}^{\infty} p_y(y) [\ln(p_y(y;\mu_p, \sigma_p)) - \ln(p_y(y; \mu_q, \sigma_q))] dy\\=& D_{KL}\{p_y(y) \Vert q_y(y)\}\end{align*}
+$$
 
 [1] T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine, “Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor,” *arXiv:1801.01290 [cs, stat]*, Aug. 2018.
 

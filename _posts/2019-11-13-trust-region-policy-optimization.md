@@ -384,7 +384,7 @@ $$
 \theta - \theta_k = \sqrt{\frac{2\delta}{g^T H^{-1} g}} H^{-1} g.
 $$
 
-We notice that we are interested in $$H^{-1}g$$  not the $$H^{-1}$$ itself. We can use [**conjugate gradient method**](https://colorlessboy.github.io/notebook/mathnotes/2019/11/13/conjugate-gradient-method.html) to avoid matrix inversion.
+We notice that we are interested in $$H^{-1}g$$  not the $$H^{-1}$$ itself. We can use [**conjugate gradient method**](https://colorlessboy.github.io/colorlessnote/mathnotes/2019/11/13/conjugate-gradient-method.html) to avoid matrix inversion.
 
 ### 5.2 Confusion Clarification
 The paper says that the penalty coefficient C recommanded by the theory causes step size very small. From TRPO algorithm, we notice that small stepsize means small $$\delta$$, and small $$\delta$$ means large $$\lambda_{\min}$$.
